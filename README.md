@@ -14,10 +14,14 @@ Launchstore is a project about building an E-commerce.
 
 
 ## Learning 
-- File gallery.
-- This is the very initial phase of this project.
-- Product creation and edit pages were developed and data is being stored on Postgres
-- As I progress with the project I will be updating the experience. 
+The first part:
+- Created page **Product creation**, so new products along with its **category** can be input into the **Front-end**.
+- Created **edit** page, so a product can be edited.
+- Data is being stored on Postgres.
+- Concepts of DBML using dbdiagram.io
+- Asynchronous Functions, callbacks and Promise.
+- Input Mask
+
 
 ## Languages used
 - Html5 (Hypertext)
