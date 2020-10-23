@@ -1,0 +1,36 @@
+{% extends 'layout.njk' %}
+
+{% block content %}
+    
+    <section class="container form"> {# This section has the "container" to hold the 90% width vh # - Same on header - and class "form"#}
+        <form method="POST" action="/products?_method=PUT">
+            <div class="header">
+                <h3>Edit product</h3>
+            </div>
+
+            <div class="fields">
+                {% include "products/fields.njk" %}
+
+                    <input 
+                        type="hidden" 
+                        name="id" 
+                        value={{product.id}}
+                    >
+            </div>
+
+            <button class="button edit" type="submit">Update</button>       
+        </form>   
+
+        <form id="form-delete" method="POST" action="/products?_method=DELETE">
+            <button class="button delete" type="submit">Delete</button> {# this is 2 classes  .button.delete#}
+             <input 
+                        type="hidden" 
+                        name="id" 
+                        value={{product.id}}
+                    >
+        </form>  
+    </section>
+
+                {% include "resource_deletion/confirm.njk" %} 
+
+{% endblock content %}

@@ -1,0 +1,88 @@
+<div class="item">
+        <div>Category</div>
+        <div>
+            
+        <select name="category_id">
+
+                {% for category in categories %}
+                        
+                <option value="{{category.id}}" {% if category.id == product.category_id %} selected
+                {% endif %}>{{category.name}}</option>
+
+                {% endfor %}
+            </select>   
+        </div>
+     </div>
+
+<div class="item">
+    <div>Name</div>
+    <div>
+        <input 
+        type="text" 
+        name="name" 
+        placeholder="Type product's Title" 
+        value="{{product.name}}">
+    </div>
+</div>
+
+<div class="item">
+    <div>Description</div>
+    <div>
+        <textarea name="description">{{product.description}}</textarea>
+    </div>
+</div>
+
+{# Photo field #}
+
+<div class="item">
+    <div>Value</div>
+    <div>
+        <input 
+            type="text" 
+            name="price" 
+            placeholder="Product Price" 
+            value="{{product.price}}"
+            onkeydown ='Mask.apply(this, "formatUSA")' {# This is a Mask to format currency #}
+        >
+    </div>
+    {% if product.old_price %} {# this is from Edition #}
+        <input type="hidden" name="old_price" value="{{product.old_price}}">
+    {% endif %}
+</div>
+
+<div class="item">
+    <div>Quantity</div>
+    <div>
+        <input 
+            type="number" 
+            name="quantity" 
+            placeholder="Number of items in inventory" 
+            min="0"
+            value="{{product.quantity}}">
+    </div>
+</div>
+
+{% if product.status=="1" or product.status == "0"  %} {# If there is not product.status, this option of "yes" or "no" won't show in the FRONT END#}
+ 
+ <div class="item">
+        <div>Available</div>
+        <div>
+            <span>
+                <input id="yes" 
+                type="radio" 
+                name="status" 
+                value="1" {% if product.status  =="1" %} checked {% endif %}>
+                <label for="yes">Yes</label>
+            </span>
+
+            <span>
+                <input id="no"
+                type="radio" 
+                name="status" 
+                value="0" {% if product.status =="0" %} checked {% endif %}>
+                <label for="no">No</label>
+            </span>
+
+        </div>
+</div>
+{% endif %}

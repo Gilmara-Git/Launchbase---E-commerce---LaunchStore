@@ -1,0 +1,281 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;0,700;1,400&display=swap');
+
+:root {
+    --primary-color: #fd951f;
+    --secondady-color: #1f83fd;
+
+}
+
+* {
+    margin:0;
+    padding: 0;
+    border:0;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    border: none;
+
+}
+
+html, body {
+
+    min-height: 100vh;
+}
+
+* body {
+
+    font-family: "Roboto", sans-serif;
+    background-color: #f9f9f9;
+}
+
+
+.container { 
+
+    width: 90%;
+    margin: 0 auto; 
+    max-width: 940px; /*Container will maitain with 90% until 940px*/
+
+}
+
+.button {
+    outline:none;
+    background-color: var(--primary-color);
+    color: white;
+    display: block; /*Make it be display block as maybe we will apply it in a SPAN*/
+    margin: 16px 0;
+    padding: 12px 16px;
+    width: 100%;
+    border: 4px;
+    align-self: end; /*This is in case a button with that CLASS will be in a GRID*/
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: 16px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 100ms;
+
+}
+
+
+.button:hover{
+
+    background-color: #d7780b;
+
+    }
+
+
+.button.edit{
+
+        background-color: #1f83fd;
+    
+    }   
+
+.button.delete{
+
+    background-color: lightgray;
+
+}    
+/* all the configurations "above" are GLOBAL */
+
+.button.edit:hover {
+    background-color:#065ac1;
+}
+
+.button.delete:hover {
+    background-color:rgb(223, 62 , 62);
+}
+
+
+header, footer { 
+    color: white;
+    background-color: black;
+    text-align: center;
+    width: 100%;
+    padding: 32px 0; /*box-sizing: border-box is configuered for all elements, so "width" is not added to "padding"*/
+    /* if padding: 32px; withouh border box, there was going to be row bar. */
+}
+
+/* header has only 1 Div (container) */
+header div.container {
+
+    display: grid;
+    grid-template-columns: 220px auto/* OR 1fr*/ 280px;
+    align-items: center;
+    grid-gap: 24px;
+
+
+}
+
+header div.container a { /* links h1 and h2*/
+
+    justify-self: start;
+}
+
+
+.logo h1 {
+
+    color: white;
+    font-size:36px;
+    line-height: 46px;
+
+}
+
+.logo h2 {
+
+    color: var(--primary-color);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 2px;
+
+}
+
+/* Search */
+
+.search input {
+
+    width:100%; /* will ocupy 100% of the available space*/
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-size: 16px;
+    outline: none;
+
+}
+
+/*Nav primary menu on the left*/
+
+nav.primary ul {  /* ul elements on the "x"*/
+
+    display: flex;
+    justify-content: space-between;
+    
+
+}
+
+nav.primary ul li a { /* elements in a  on the "x"*/
+
+    display: flex;
+    align-items: center; 
+    color: white;
+    transition: 200ms;
+
+}
+
+
+nav.primary ul li a:hover{
+
+    color: var(--primary-color);
+}
+
+nav.primary ul li a i { 
+    
+    margin-right: 8px;
+
+}
+
+/*Styling the product form */
+
+section.form {
+
+    background-color: white;
+    padding: 32px 24px;
+    margin: 32px auto;
+    box-shadow: 2px 2px 2px -2px rgba(60,60,60,0.9);
+    border: 1px solid #efefef;
+    max-width: 700px;
+    width: 90%; /*This form will be 90% until it gets to 700px*/
+
+}
+
+section.form .header h3 {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+
+}
+
+form .fields {
+
+    margin-bottom: 64px;
+
+}
+
+
+form .item {
+
+    margin-bottom: 16px;
+
+}
+.item div:nth-child(1) { /*First div of all fields*/
+
+    color: #777;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+
+}
+
+form .item input[type="text"],
+form .item input[type="number"],
+form .item textarea,
+form .item select {
+
+    width: 100%;
+    padding: 8px 16px;
+    border: 1px solid #efefef;
+    box-shadow:  2px 2px 2px -2px rgba(63,63,63,0.9);
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none; 
+
+}
+
+/* Customizing the select, so we will not use it from the browser */
+
+form .item select { 
+   
+    -moz-appearance: none;  /*Set OFF the appearance of SELECT in mozilla as none*/
+    -webkit-appearance: none; /*Set OFF the appearance of SELECT in safari as none*/
+    appearance: none;  /*Set OFF the appearance of SELECT in Chrome as none*/
+
+    /*Now, we are going to use a customized one.*/
+    /* There are going to be 2 background images for the select*/
+    /* Got it from Rocketseat repo*/
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+      linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%); /*There is an image here that on the Top is light and gradiently darkens to the bottom*/
+    background-repeat: no-repeat;
+    background-position: right .7em top 50%, 0 0;  /*There are 2 images = 1st space on the right .7em and space top 50%, 0 for the other image*/
+    background-size: .65em auto, 100%; /* .65em(image height) and auto(image width) adjusts the size of the icon select and 100% makes the image on the backgroud the icon cover 100% from left to right*/
+
+
+}
+
+form .item textarea  {
+
+    min-height: 150px;
+    resize: vertical;
+
+}
+
+form .item span {
+    
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    border-radius: 16px;
+    color:white; 
+    display: inline-block;
+    margin-right:4px;
+    margin-top: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    
+}
+
