@@ -25,10 +25,16 @@ module.exports =  {
             //yyyy vamos pegar o day - Datas vem de 1 a 31 
             const day = `0${date.getUTCDate()}`.slice(-2)
 
+            const hours = date.getHours();
+
+            const minutes = date.getMinutes();
+
            return {
                 day,
                 month,
                 year,
+                hours,
+                minutes,
                 iso: `${year}-${month}-${day}`,
                 birthday: `${day}/${month}`,
                 format: `${day}/${month}/${year}`
