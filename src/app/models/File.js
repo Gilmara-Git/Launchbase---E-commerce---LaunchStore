@@ -2,7 +2,7 @@ const db = require('../../config/db')
 
 module.exports = {
 
-    create(filename, path, product_id){
+    create({filename, path, product_id}){
         console.log(filename)
         console.log(path)
         console.log(product_id)
@@ -25,6 +25,7 @@ module.exports = {
                     product_id
         ]
 
+        console.log(values)
         return db.query(query, values)
     }
 }

@@ -30,7 +30,7 @@ module.exports = {
         }
         
         if (req.files.length == 0 )   return res.send('Please, send at least one image')
-        console.log(req.files)
+        //console.log(req.files)
        
 
         let results = await Product.create(req.body) // on the creating it will return an "id"       
@@ -39,12 +39,12 @@ module.exports = {
         const filesPromise = req.files.map(file => File.create({ 
             ...file, 
             product_id: productId
-           
+                       
         }))
-        console.log(filesPromise)    
+        //console.log(filesPromise)    
         await Promise.all(filesPromise)
         
-        return res.redirect(`products/${productId}`)
+        return res.redirect(`products/${productId}/edit`)
     },
 
     async edit(req, res){
