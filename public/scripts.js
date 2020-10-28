@@ -165,8 +165,23 @@ const PhotosUpload = {
 
         photoDiv.remove(); 
         
-    }
+    }, 
 
+    removeOldPhoto(event){
+
+        const photoDiv = event.target.parentNode;
+        
+        if(photoDiv.id){
+
+            const removedFiles = document.querySelector('input[name="removed_files"');
+
+            if (removedFiles) { // photos on dataBase
+
+                removedFiles.value += `${photoDiv.id},` // 1, 3, 4, Later it will be an array (.split)
+            }       
+        }
+        photoDiv.remove(); // photos on FrontEnd
+    }
 }
 
 // On the input  = document.querySelect("#photos-input")
