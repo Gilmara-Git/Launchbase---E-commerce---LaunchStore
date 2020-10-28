@@ -1,7 +1,7 @@
 const Category = require("../models/Category")
 const Product =  require("../models/Product")
 const File = require("../models/File")
-const {formatPriceComingFromDb} = require("../../lib/utils")
+const {formatPriceComingFromDb, date} = require("../../lib/utils")
 
 
 module.exports = {
@@ -45,12 +45,37 @@ module.exports = {
         //console.log(filesPromise)    
         await Promise.all(filesPromise)
         
-        return res.redirect(`products/${productId}/edit`)
+        return res.redirect(`products/${productId}`)
     },
 
-    show(req, res) {
+    async show(req, res) {
 
-       return res.render('products/show')
+        const { id } = req.params
+
+        let results = await Product.find(id)
+        const product = results.rows[0];
+
+        if(!product) return res.send('Product not found!')
+
+        const { day, month, hour, minutes} = date(product.updated_at)
+        
+        //here we are creating an object to send to Front-end ( In te Front-end it wil be product.day and product.hour)
+        product.published = {            
+            day: `${day}/${month}`,
+            hour: `${hour}h:${minutes}m`
+        }
+        
+        product.old_price = formatPriceComingFromDb(product.old_price);
+        product.price = formatPriceComingFromDb(product.price);
+        
+        // result = await Product.files(product.id)  
+        // let productImages = result.rows  
+        
+        
+
+        // console.log(productImages)
+
+       return res.render('products/show', {product})
 
     },
 
@@ -87,7 +112,7 @@ module.exports = {
     
     async put(req, res) {    
     const keys =  Object.keys(req.body)
-        console.log(req.body)
+        //console.log(req.body)
         for (let key of keys){
             if(req.body[key]=="" && key != "removed_files") {
                 return res.send("Please fill out all fields!")
@@ -128,7 +153,7 @@ module.exports = {
 
             await Product.update(req.body)
 
-            return res.redirect(`/products/${req.body.id}/edit`)
+            return res.redirect(`/products/${req.body.id}`)
 
     
 
