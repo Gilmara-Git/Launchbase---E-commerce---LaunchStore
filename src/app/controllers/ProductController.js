@@ -1,7 +1,7 @@
 const Category = require("../models/Category")
 const Product =  require("../models/Product")
 const File = require("../models/File")
-
+const {formatPriceComingFromDb} = require("../../lib/utils")
 
 
 module.exports = {
@@ -38,7 +38,8 @@ module.exports = {
         
         const filesPromise = req.files.map(file => File.create({ 
             ...file, 
-            product_id: productId
+            product_id: productId,
+            path: `${file.path.replace(/\\/g, "/")}`
                        
         }))
         //console.log(filesPromise)    
@@ -51,25 +52,66 @@ module.exports = {
                     
         let results = await Product.find(req.params.id) 
         const product = results.rows[0]
+        
             if(!product) return res.send ("Product not found!")
 
         product.price = formatPriceComingFromDb(product.price)    
         product.old_price = formatPriceComingFromDb(product.old_price)
 
+        //get categories
         results = await Category.all()   
         const categories = results.rows
         
-        return res.render("products/edit.njk", { product, categories})
+        //get images-files
+        results = await Product.files(product.id)
+        //console.log(results)
+        let files = results.rows;
+        // setting the right address for the image (public\\images\\1603810102967-liveIncrivel.png')
+        files = files.map(file => 
+            ({
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+            }))
+
+            //console.log(files)
+        return res.render("products/edit.njk", { product, categories, files})
 
         
     }, 
     
-    async put(req, res) {
-        const keys =  Object.keys(req.body)
-        //console.log(req.body)
+    async put(req, res) {    
+    const keys =  Object.keys(req.body)
+        console.log(req.body)
         for (let key of keys){
-            if(req.body[key]=="") return res.send("Please fill out all fields!")
-           
+            if(req.body[key]=="" && key != "removed_files") {
+                return res.send("Please fill out all fields!")
+             }     
+            }
+        
+             
+            if(req.files.length != 0){
+
+                const newFilesPromise = req.files.map(file => 
+                    File.create({
+                        ...file,
+                        product_id: req.body.id,
+                    }))
+                await Promise.all(newFilesPromise)
+            }
+
+            if(req.body.removed_files){
+                //42, 41 -> [42, 41,] Como tem a virgula a ultima posicao esta vaziz
+                const removedFiles =  req.body.removed_files.split(",");
+                const lastIndex =  removedFiles.length -1; 
+                removedFiles.splice(lastIndex, 1) //[42,41]
+
+                const removedFilesPromise = removedFiles.map(id => File.delete(id))
+
+                await Promise.all(removedFilesPromise)
+
+                }
+            
+
             req.body.old_price = req.body.old_price.replace(/\D/g, "")
             req.body.price = req.body.price.replace(/\D/g, "")
 
@@ -82,7 +124,7 @@ module.exports = {
 
             return res.redirect(`/products/${req.body.id}/edit`)
 
-    }
+    
 
     }, 
 

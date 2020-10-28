@@ -1,12 +1,10 @@
 const db = require('../../config/db')
+const fs = require("fs");
 
 module.exports = {
 
     create({filename, path, product_id}){
-        console.log(filename)
-        console.log(path)
-        console.log(product_id)
-
+       
         const query = `        
                     INSERT INTO files (
                         name,
@@ -25,7 +23,30 @@ module.exports = {
                     product_id
         ]
 
-        console.log(values)
+        
         return db.query(query, values)
+    },
+
+   async delete(id) {
+
+        try {
+
+        const result = await db.query (`SELECT path FROM files WHERE id = $1`, [id])
+        const file = result.rows[0]
+        //console.log(file)
+        fs.unlinkSync(file.path);
+
+        // this deletes from dabatase. The logic above deletes from public/images - unlinkSync
+        return db.query(`
+
+                    DELETE from files WHERE id=$1`, [id]       
+        )
+            
+        } catch (error) {
+
+            console.error(error)
+            
+        }        
     }
+
 }
