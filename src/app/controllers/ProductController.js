@@ -68,14 +68,15 @@ module.exports = {
         product.old_price = formatPriceComingFromDb(product.old_price);
         product.price = formatPriceComingFromDb(product.price);
         
-        // result = await Product.files(product.id)  
-        // let productImages = result.rows  
-        
-        
+        results = await Product.files(product.id)  
+        let files = results.rows.map(file => ({
 
-        // console.log(productImages)
-
-       return res.render('products/show', {product})
+                ...file,
+                src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+        })  )
+        
+    
+       return res.render('products/show', {product, files})
 
     },
 
