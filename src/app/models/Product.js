@@ -87,7 +87,13 @@ delete(id) {
     return db.query(`
                     DELETE FROM products
                     WHERE id= $1`, [id] )
-}
+},
 
-    
+files(id) {
+
+    return db.query(`
+                
+                    SELECT * FROM files where product_id= $1`, [id]
+                )
+            }    
 }
