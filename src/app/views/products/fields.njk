@@ -75,7 +75,7 @@
             name="price" 
             placeholder="Product Price" 
             value="{{product.price}}"
-            onkeydown ='Mask.apply(this, "formatUSA")' {# This is a Mask to format currency #}
+            onkeydown ='Mask.apply(this, "formatBRL")' {# This is a Mask to format currency #}
         >
     </div>
     {% if product.old_price %} {# this is from Edition #}
