@@ -9,8 +9,21 @@
                 {% if not files[0] %}
                     <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO"/>
                     {%else%}
-                    <img src="{{files[0].src}}" alt="{{files[0].name}}"/>
+                    <img 
+                    src="{{files[0].src}}" 
+                    alt="{{files[0].name}}"
+                    onclick="LightBox.open(event)"
+                    />
                 {% endif %}
+
+                <div class="lightbox-target">
+                    <img src="{{files[0].src}}" alt="{{files[0].name}}"/>
+                    <a href="#"class="lightbox-close"
+                    onclick="LightBox.close()"
+                    >
+                        <i class="material-icons">close</i>
+                    </a>
+            </div>
 
             </div>
 
@@ -23,6 +36,8 @@
                     {% if loop.index0 == 0 %}
                        class="active" 
                     {%endif%}
+                    
+                    onclick="ImageGallery.setImage(event)"
                     />
                     
                 {% endfor %}

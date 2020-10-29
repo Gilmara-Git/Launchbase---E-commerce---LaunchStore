@@ -33,12 +33,12 @@
 
         },
 
-        formatUSA(value){
+        formatBRL(value){
             value = value.replace(/\D/g, "")           
             // console.log("estou aqui no format")
-            return value = Intl.NumberFormat("en-US", {
+            return value = Intl.NumberFormat("pt-BR", {
                  style: "currency",
-                 currency: "USD"             
+                 currency: "BRL"             
              }).format(value/100) 
              
         }
@@ -188,4 +188,56 @@ const PhotosUpload = {
 // input.files = will show the pictures uploaded, but if we delete them form the FRONT end.  It does not delete from the fileList.
 // There is no way to work with the fileList because we can only read files.
 // we are going to bring this fileList into and array  files = [ ] and pass a DataTransfer constructor to it. 
+
+//------------------------------------------------------------------
+
+const ImageGallery = {    
+    
+    photosOnPreview: document.querySelectorAll('.gallery-preview img'),
+    highlight: document.querySelector('.gallery .highlight > img'),
+    
+
+       
+
+   setImage(event) {
+    const {target} = event;
+    console.log(target)
+
+    ImageGallery.photosOnPreview.forEach(photo => photo.classList.remove('active'));
+
+    target.classList.add('active');
+
+    ImageGallery.highlight.src = target.src;
+    LightBox.image.src = target.src;
+}, 
+
+
+}
+
+
+const LightBox = {
+
+    target: document.querySelector('.lightbox-target'),
+    image: document.querySelector('.lightbox-target img'),
+
+    open(){        
+                   
+        LightBox.target.style.top="0";
+        LightBox.target.style.opacity="1";
+        LightBox.image.src = target.src;
+
+    },
+
+    close(){
+
+        LightBox.target.style.top="-100%";
+        LightBox.target.style.opacity="0";
+       
+    }
+
+
+    }
+
+  
+
 
