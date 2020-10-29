@@ -5,7 +5,7 @@
 
 
 <h1 align="center">
-    <img src="https://ik.imagekit.io/cnbmdh4b9w/ecommerce_HhknSzNHC.png">
+    <img src=https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__2__PBPFt9fUJ.gif>
 </h1>
 
 
@@ -35,6 +35,11 @@ The third part:
  
 - On the Edit page, retrieved all files related to a product and displayed them on the Edit page. 
 - On PUT/update route, created an array coming from backend with all the images that were set to be deleted. Then, created a promise to delete them in the backend. 
+
+The forth part:
+- Created and styled an Image Gallery to display images on page Show.
+- Created a lightBox to display the main image in a bigger box, so user can see it details.
+
 
 ## Languages used
 - Html5 (Hypertext)
