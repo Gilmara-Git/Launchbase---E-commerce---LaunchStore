@@ -113,7 +113,7 @@ module.exports = {
     
     async put(req, res) {    
     const keys =  Object.keys(req.body)
-        //console.log(req.body)
+        console.log('linha 116 na rota PUt' ,req.body)
         for (let key of keys){
             if(req.body[key]=="" && key != "removed_files") {
                 return res.send("Please fill out all fields!")

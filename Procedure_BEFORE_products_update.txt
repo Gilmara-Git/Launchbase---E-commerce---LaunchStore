@@ -1,0 +1,21 @@
+Procedure to runs every time there will be an update on Table Producst
+
+CREATE FUNCTION trigger_set_timeStamp()
+RETURNS TRIGGER AS 
+$$
+BEGIN
+
+NEW.updated_at = Now();
+RETURN NEW;
+
+END;
+
+$$ LANGUAGE plpgsql; 
+
+
+How to invoke the procedure : 
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON products
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();

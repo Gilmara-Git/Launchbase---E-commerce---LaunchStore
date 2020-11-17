@@ -62,20 +62,22 @@ return db.query(`
 
 }, 
 update(data) {
-
+const {id}  =  data
+//console.log('banco id - linha 66 ', id)
     const query = `
     
                     UPDATE products SET 
-                    category_id=($1),
-                    user_id=($2),
-                    name=($3),
-                    description=($4),
-                    old_price=($5),
-                    price=($6),
-                    quantity=($7),
-                    status=($8) 
+                        category_id=($1),
+                        user_id=($2),
+                        name=($3),
+                        description=($4),
+                        old_price=($5),
+                        price=($6),
+                        quantity=($7),
+                        status=($8) 
+                    WHERE id= $9`
 
-    `
+    
 
     const values = [
 
@@ -86,7 +88,8 @@ update(data) {
                     data.old_price,
                     data.price,
                     data.quantity,
-                    data.status 
+                    data.status,
+                    data.id 
 
 ]
 
@@ -109,5 +112,41 @@ files(id) {
                 
                     SELECT * FROM files where product_id= $1`, [id]
                 )
-            }    
+            },
+            
+search(params){
+
+const {filter, category} = params;
+
+let query = "",
+    filterQuery = `WHERE`
+
+
+if(category){
+    //console.log('linha 124 banco de dados',category)
+    filterQuery = `${filterQuery}
+    products.category_id = ${category} 
+    AND`
+}
+
+
+filterQuery = `
+    ${filterQuery}
+    products.name ILIKE '%${filter}%'
+    OR products.description ILIKE '%${filter}%'
+`
+
+
+query = `
+     SELECT products.*,
+     categories.name AS category_name
+     FROM products
+     LEFT JOIN categories ON(categories.id = products.category_id)
+     ${filterQuery} 
+     GROUP BY products.id , categories.id
+    
+`
+
+    return db.query(query)
+}
 }

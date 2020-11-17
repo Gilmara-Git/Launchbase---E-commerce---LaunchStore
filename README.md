@@ -40,6 +40,14 @@ The forth part:
 - Created and styled an Image Gallery to display images on page Show.
 - Created a lightBox to display the main image in a bigger box, so user can see it details.
 
+The fifth part:
+- Created the Home Page (showing 3 products on  a GRID. The most updated is shown first.)
+- In order to show products by their updated time, created a PROCEDURE in Postgres to update the 'updated_at' field.
+
+<h1 align="center">
+    <img src=https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__4__hpvXMnmUu.gif>
+</h1>
+
 
 ## Languages used
 - Html5 (Hypertext)

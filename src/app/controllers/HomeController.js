@@ -7,6 +7,7 @@ module.exports = {
 
 async index(req, res) {
 
+   try {
    let results = await Product.all() 
    const products = results.rows 
 
@@ -35,10 +36,15 @@ async index(req, res) {
 
 
     const lastAdded =  await Promise.all(productsPromise)
-    console.log('linha 38', lastAdded)
+    //console.log('linha 38', lastAdded)
 
     return res.render('home/index', {products: lastAdded})
 
    }
 
+   catch(err){
+      console.error(err)
+   }
+
+}
 }
