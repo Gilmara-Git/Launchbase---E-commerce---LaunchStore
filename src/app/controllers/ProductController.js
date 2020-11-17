@@ -30,7 +30,7 @@ module.exports = {
         }
         
         if (req.files.length == 0 )   return res.send('Please, send at least one image')
-        //console.log(req.files)
+        console.log(req.files)
        
 
         let results = await Product.create(req.body) // on the creating it will return an "id"       
@@ -162,11 +162,18 @@ module.exports = {
 
     async delete(req, res) {
 
-//        console.log(req.body.id)
+       console.log(' linha 165 no banco de dados', req.body.id)  
+        try {
 
-        await Product.delete(req.body.id)
+            await Product.delete(req.body.id)
 
-        return res.redirect("/products/create")
+            return res.redirect("/products/create")
+
+        } catch (error) {
+            console.error(error)
+        }
+
+       
     }
 
 }

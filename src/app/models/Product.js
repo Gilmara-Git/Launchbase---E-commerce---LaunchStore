@@ -6,6 +6,20 @@ const db = require("../../config/db")
 
 module.exports = {
 
+all(){
+
+    try {
+        return db.query(`
+                SELECT * FROM products
+                ORDER BY updated_at DESC
+        `)
+
+    } catch (error) {
+        console.error(error)
+    }
+
+},
+
 create(data){
 
     const query =  `
