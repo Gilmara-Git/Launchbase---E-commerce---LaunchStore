@@ -46,6 +46,7 @@ The forth part:
 - Css3 (Cascading Style Sheet)
 - Javascript
 - Postgres
+- node.js
 
 
 
