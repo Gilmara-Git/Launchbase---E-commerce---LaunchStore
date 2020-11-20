@@ -1,0 +1,309 @@
+Aula   =Modulo  " Cadastrando Usuarios" 
+
+"Registro de Usuarios - > ES6, classes e heranca"
+
+
+
+//Ecmascript 6 - js rules
+// const, let
+// template literas `strings`
+// spread operator -  { ...objeto } [...array...]
+// shorthand { a() }
+// arrow function () =>{}
+
+// Conhecendo Classes e heranca
+// Classe = molde de objeto
+// Ex: instead of const UserController - { index() {},}
+class UserController {
+    constructor(name, address) {
+        this.name = name
+        this.address = address
+    }
+
+    getnameAddress(){
+       return this.name + '' + this.address
+
+    }
+
+}
+
+const user1 = new UserController("Gilmara ", " Rua Sao Pio X")
+console.log(user1.getnameAddress())
+
+
+const user2 = new UserController("Alzira ", " Rua Sao Pio Y")
+console.log(user2.getnameAddress())
+
+
+console.log(user1.name)
+console.log(user2.address)
+
+
+
+===========================================================
+
+
+// Como nao estaremos passando valores para ca, poderiamos usar a ideia de classe para o UserController da seguinte forma
+// Retiraria a funcao constructor 
+class UserController {
+
+    registerForm(req, res){
+       return res.redirect('/products')
+
+    }
+
+}
+
+// precisamos exportar o UserController como new UserController ( que e um constructor)
+module.exports = new UserController(); // aqui estamos exportando o objeto 1 vez somente
+
+=================================================================================
+
+
+
+class UserController {
+
+    registerForm(req, res){
+       return res.redirect('/products')
+
+    }
+
+}
+
+// precisamos exportar o UserController como new UserController ( que e um constructor)
+module.exports = new UserController(); // aqui estamos exportando o objecto 1 vez somente
+
+===============================================================================
+Ideia de Heranca
+
+Vamos supor que temos uma classe PERSON e vamos estender a Classe DEV para PERSON
+Isso quer dizer que conseguimos trazer as prppriedades de PERSON em DEV e para isso precisamos usar o 
+Constructor super () para acessar / herdar propriedades de PERSON
+
+
+class Person {
+
+    
+    constructor(name){
+        this.name = name;
+        }
+
+    getname(){
+        return this.name
+
+    }
+
+
+}
+
+class Dev extends Person {
+
+    constructor(){
+        super()
+        this.name = "outra coisa"
+    }
+
+    getname(){
+
+        return this.name
+    }
+}
+
+const dev = new Dev("Zizi")
+console.log(dev.getname()) // Zizi
+
+========================================================
+
+Se na DEV nao tiver nada, podemos acessar o que esta me PERSON sem usar o construtor super)(
+
+class Person {
+
+    
+    constructor(name){
+        this.name = name;
+        }
+
+    getname(){
+        return this.name
+
+    }
+
+
+}
+
+class Dev extends Person {
+
+ 
+}
+
+const dev = new Dev("Zizi")
+console.log(dev.getname()) ///zizi
+
+
+==================================================================
+
+Eu consigo sobrescrever um metodo na PERSOn
+
+class Person {
+    
+    constructor(name){
+        this.name = name;
+        }
+
+    getName(){
+        return this.name
+
+    }
+
+
+}
+
+class Dev extends Person {
+    getName(){
+
+        return "Sobrescrevi o que esta na PERSON"
+    }
+ 
+}
+
+
+const dev = new Dev("Zizi")
+console.log(dev.getName()) //  Sobrescrevi o que esta na PERSON
+
+
+==============================
+
+Assim tambem consigo sobrescrever
+
+class Person {
+    
+    constructor(name){
+        this.name = name;
+        }
+
+    getName(){
+        return this.name
+
+    }
+
+
+}
+
+class Dev extends Person {      ///// Aqui como eu nao tenho um constructor eu nao PRECISO puxar o SUPER()
+    getName(){
+
+        return this.name
+    }
+ 
+}
+
+
+const dev = new Dev("Mayk Brito")
+console.log(dev.getName()) // Mayk Brito
+
+=========================================================
+
+
+Mas se eu crio um constructor antes de chamar o metodo getName dentro da classe DEV, eu obrigatoriamente precisarei chamar
+o constructor super()
+
+class Person {
+    
+    constructor(name){
+        this.name = name;
+        }
+
+    getName(){
+        return this.name
+
+    }
+
+
+}
+
+class Dev extends Person {
+
+    constructor(){
+        this.name = "outra coisa"
+    }
+    
+    getName(){
+
+        return this.name
+    }
+ 
+}
+
+
+const dev = new Dev("Mayk Brito")
+console.log(dev.getName()) ///// Erro : 
+
+node UserController
+C:\Users\gilma\Documents\Rocketseat_LaunchBase_Bootcamp\bootcamp\launchstore\src\app\controllers\UserController.js:18
+        this.name = "outra coisa"
+        ^
+
+ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+    at new Dev (C:\Users\gilma\Documents\Rocketseat_LaunchBase_Bootcamp\bootcamp\launchstore\src\app\controllers\UserController.js:18:9)
+    at Object.<anonymous> (C:\Users\gi
+
+
+==========================================================================================
+
+class Person {
+    
+    constructor(name){
+        this.name = name;
+        }
+
+    getName(){
+        return this.name
+
+    }
+
+
+}
+
+class Dev extends Person {
+
+    constructor(){
+        super()
+        this.name = "outra coisa"
+    }
+
+    getName(){
+
+        return this.name
+    }
+ 
+}
+
+
+const dev = new Dev("Mayk Brito")
+console.log(dev.getName()) /// outra coisa  ( Aqui conseguimos sobrescrecer pq passamos o super)
+
+Isso tudo e conceito de ORIENTACAO A OBJETO
+Apos criar uma classe ela ma devolve um OBJETO
+Heranca de outra classe outras coisas
+Isso ajuda a dar uma boa organizada no codigo
+
+O Mayk gosta mais de usar function ou mesmo retornar um objeto
+
+=========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
