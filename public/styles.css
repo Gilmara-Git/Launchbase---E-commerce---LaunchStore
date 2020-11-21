@@ -684,3 +684,13 @@ form .item #photos-preview img {
 }
 
 
+/*Validate errors  - div created on scripts.js* This is on the user registration Form/*/
+
+ .input .error {
+
+    background-color:lightcoral;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+    width: 60%;
+} 
