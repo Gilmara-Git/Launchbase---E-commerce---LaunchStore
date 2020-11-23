@@ -16,7 +16,11 @@ async function post(req, res, next){
     const user = await User.findOne({
         where: {email}, or: {cpf_cnpj}}) //Passando um filtro em formato de objeto
 
-    if(user) return res.send('User already exists.')
+    if(user) return res.render("user/register",  { // antes de chegar em users/register, ele passa pela layout e la vericamos se existe o erro ou nao.
+        user: req.body,
+        error: 'Usuário já cadastrado.'
+    }
+    )
 
     // check if password match
     
