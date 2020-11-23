@@ -4,7 +4,11 @@ async function post(req, res, next){
     
     const keys = Object.keys(req.body)
     for( let key of keys){
-        if(req.body[key]=="") return res.send('Please fill out all fields!')
+        
+        if(req.body[key]=="") return res.render('user/register',{
+            user: req.body,
+            error: "Por favor preencha todos os campos."
+        })
         //console.log('linha 15',key)
         //console.log('linha160', req.body[key])
     }
@@ -26,7 +30,11 @@ async function post(req, res, next){
     
     if(password != passwordRepeat){
 
-        return res.send('Password Mismatch.')
+        return res.render('user/register', {
+
+            user: req.body,
+            error: "A senha e a repetição de senha não conferem."
+        })
     }
     
         
