@@ -15,7 +15,7 @@ async function post(req, res, next){
 
     //check if user exists [email, cpf_cnpj] - email and cpf_cnpj sao UNIQUE
     let { email, cpf_cnpj, password, passwordRepeat} = req.body;
-    cpf_cnpj = cpf_cnpj.replace(/\D/g, "") // retirando pontos e traco
+    cpf_cnpj = cpf_cnpj.replace(/\D/g, "") // retirando pontos e traço
 
     const user = await User.findOne({
         where: {email}, or: {cpf_cnpj}}) //Passando um filtro em formato de objeto
