@@ -51,7 +51,7 @@ async create(data){
 `
 
 // password hash ( download npm install bcryptjs ) 
-        const passwordHash = await hash(data.password, 8);  // hash is a promise ( need await) - 8 é a força do Hash
+        const passwordHash = await hash(data.password, 8);  // hash is a promise ( needs await) - 8 é a força do Hash
 
 
         const values = [ 
