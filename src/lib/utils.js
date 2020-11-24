@@ -41,4 +41,49 @@ module.exports =  {
            }
 
         },
-}
+
+        formatCpfCnpj(value){
+//            console.log(value)
+            value = value.replace(/\D/g, "") // limpando tudo que nao e digito
+
+            if(value.length > 14){
+
+                value = value.slice(0,-1) // tirando a ultima posicao
+            }
+
+            //check if is cpf or cnpj (11.222.333/0001-88)
+            if(value.length > 11){
+
+                value = value.replace(/(\d{2})(\d)/, "$1.$2")
+                value = value.replace(/(\d{3})(\d)/, "$1.$2")
+                value = value.replace(/(\d{3})(\d)/, "$1/$2")
+                value = value.replace(/(\d{4})(\d)/, "$1-$2")
+
+                // could be this as well -- value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})/, "$1.$2.$3/$4-")
+
+            } else {
+                // 033.145.685-99
+                value = value.replace(/(\d{3})(\d)/, "$1.$2") 
+                value = value.replace(/(\d{3})(\d)/, "$1.$2") 
+                value = value.replace(/(\d{3})(\d)/, "$1-$2")    
+
+            }
+            return value
+        },
+        
+        formatCep(value){
+            //console.log(value)
+            
+            value = value.replace(/\D/g, "") // limpando tudo que nao e digito
+
+            if(value.length > 8){
+
+                value = value.slice(0, -1)
+            }
+            
+            value = value.replace(/(\d{5})(\d)/, "$1-$2")
+            return value
+
+
+        }
+    }
