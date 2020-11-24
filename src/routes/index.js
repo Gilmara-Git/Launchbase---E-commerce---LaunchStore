@@ -14,7 +14,7 @@ routes.get('/', HomeController.index)
 routes.use('/products', products)
 
 // users routes
-routes.use("/users", users) // this is to insert '/users' in front of USERS routes 
+routes.use("/users", users) // this is to insert '/users' in front all USERS routes 
 
 //Alias
 routes.get('/ads/create', function (req, res){  //mask route of /products/create

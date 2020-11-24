@@ -9,8 +9,7 @@ async function post(req, res, next){
             user: req.body,
             error: "Por favor preencha todos os campos."
         })
-        //console.log('linha 15',key)
-        //console.log('linha160', req.body[key])
+        
     }
 
     //check if user exists [email, cpf_cnpj] - email and cpf_cnpj sao UNIQUE
