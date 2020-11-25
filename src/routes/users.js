@@ -7,7 +7,7 @@ const Validator = require('../app/validators/user')
 
 // All of theses routes start with "/users"
 //login/logout
-// routes.get('/login', SessionController.loginForm)
+routes.get('/login', SessionController.loginForm)
 // routes.post('/login', SessionController.login)
 routes.post('/logout', SessionController.logout)
 
