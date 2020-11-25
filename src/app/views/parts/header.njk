@@ -23,15 +23,32 @@
                 <li>
                     <a href="/ads/create">
                         <i class="material-icons">add</i>
-                        New add
+                        Novo Anúncio
                     </a>
                 </li>
 
-                <li>
+                <li class="accounts">
                     <a href="/accounts">
                         <i class="material-icons">account_circle</i>
-                        My Account
+                        Minha Conta
                     </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="/users">Minhas Contas</a>
+                        </li>
+                        <li>
+                            <a href="/buying">Meus pedidos</a>
+                        </li>
+                        <li>
+                            <a href="/selling">Minhas Vendas</a>
+                        </li>
+                        <li>
+                            <form action="/users/logout" method="POST">
+                                <button>Sair</form>
+                            </form>
+                        </li>                        
+                    </ul>
+                  
                 </li>    
             </ul>
         </nav>
