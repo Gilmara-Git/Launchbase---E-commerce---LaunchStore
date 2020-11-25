@@ -60,7 +60,7 @@ async function show(req, res, next){
     const { userId: id } = req.session
 
     const user =  await User.findOne({ where: {id} })
-    console.log('linha 26 ', user)
+    //console.log('linha 26 ', user)
     
       if(!user) return res.render('user/register',{
 
@@ -93,7 +93,7 @@ async function update(req, res, next){
     const user = await User.findOne({where: {id} })
 
     //check if password match
-    passwordMatch = await compare(password, user.password) // Descriptografando a senha.
+    const passwordMatch = await compare(password, user.password) // Descriptografando a senha.
 
     if(!passwordMatch) return res.render('user/index', {
         user: req.body,

@@ -3,12 +3,13 @@ const routes = express.Router();
 
 const SessionController = require('../app/controllers/SessionController')
 const UserController = require('../app/controllers/UserController')
-const Validator = require('../app/validators/user')
+const UserValidator = require('../app/validators/user')
+const SessionValidator = require('../app/validators/session')
 
 // All of theses routes start with "/users"
 //login/logout
 routes.get('/login', SessionController.loginForm)
-// routes.post('/login', SessionController.login)
+routes.post('/login', SessionValidator.login, SessionController.login)
 routes.post('/logout', SessionController.logout)
 
 
@@ -21,10 +22,10 @@ routes.post('/logout', SessionController.logout)
 
 // //user registration controller
 routes.get('/register', UserController.registerForm)
-routes.post('/register', Validator.post, UserController.post)
+routes.post('/register', UserValidator.post, UserController.post)
 
-routes.get('/', Validator.show, UserController.show)
-routes.put('/', Validator.update, UserController.update)
+routes.get('/', UserValidator.show, UserController.show)
+routes.put('/', UserValidator.update, UserController.update)
 // routes.delete('/', UserController.delete)
 
 
