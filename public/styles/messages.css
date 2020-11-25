@@ -17,6 +17,12 @@
     background: lightcoral;
 }
 
+.messages.success {
+
+    background: greenyellow;
+
+}
+
 @keyframes hideMessage {
 
      to {
