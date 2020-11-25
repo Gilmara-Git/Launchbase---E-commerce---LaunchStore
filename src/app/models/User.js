@@ -23,7 +23,7 @@ async findOne(filters){
     
     })
 
-//console.log('linha 20', query)
+            //console.log('linha 26', query)
 
     const results =  await db.query(query)
     return results.rows[0]

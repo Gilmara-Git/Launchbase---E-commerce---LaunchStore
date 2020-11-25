@@ -7,6 +7,13 @@ logout(req, res){ // logout does not need async
 }, 
 loginForm(req, res){
 
-   return res.render('session/index')
+   return res.render('session/login')
+}, 
+
+login(req, res) {
+   //colocar o usuario no req.session
+   req.session.userId = req.user.id
+   return res.redirect('/users')
+
 }
 }
