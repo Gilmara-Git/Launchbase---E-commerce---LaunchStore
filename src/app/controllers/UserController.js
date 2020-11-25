@@ -21,20 +21,47 @@ module.exports = {
 
      async show(req, res){
 
-      const { userId: id } = req.session
-      const user =  await User.findOne({ where: {id} })
-      console.log('linha 26 ', user)
-      
+      const { user } = req; // this is coming from the Validator
 
-      if(!user) return res.render('user/register',{
-
-          error: 'Usuário não encontrado!'
-      })
-      
       user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
       user.cep = formatCep(user.cep)
 
       return res.render("user/index",  { user })
+     }, 
+
+     async update(req, res){
+
+      try{ 
+
+        const { user } = req;
+        let { name, email, cpf_cnpj, cep, address} =  req.body
+
+        cpf_cnpj =  cpf_cnpj.replace(/\D/g, "")
+        cep =  cep.replace(/\D/g, "")
+
+
+        await User.update(user.id, {
+
+          name,
+          email,
+          cpf_cnpj,
+          cep,
+          address
+        })
+
+        return res.render('user/index', {
+          user: req.body,
+          success: 'Conta atualizada com sucesso!'
+        })
+        
+      } catch(error) {
+        console.error(error)
+        return res.render('user/index', { 
+          
+          error: "Algum erro aconteceu."
+
+   })
+      }
      }
 
 

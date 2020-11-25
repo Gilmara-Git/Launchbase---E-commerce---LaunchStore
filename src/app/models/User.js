@@ -70,6 +70,31 @@ async create(data){
             }catch(err) {
                 console.error(err)
             }
-            }
+},
 
+async update(id, fields){
+
+    let query = "UPDATE users SET"
+    
+    Object.keys(fields).map((key, index, array)=>{
+        
+        if((index + 1) < array.length) {
+
+            query = `${query}
+            ${key} = '${fields[key]}',
+
+            `
+        } else { 
+            // ultima iteracao do array nao tem virgula ao final
+            query = `${query}
+            ${key} = '${fields[key]}'
+            WHERE id = ${id}
+            `
+            
+        }
+        })
+        //console.log('linha 96 db', query)
+        await db.query(query)
+        return
+}
 }
