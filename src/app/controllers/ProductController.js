@@ -7,9 +7,9 @@ const {formatPriceComingFromDb, date} = require("../../lib/utils")
 module.exports = {
 
     create(req, res) { // Callbacks evolved into promises. Below is an initial example. We are going to wait for a return. Thereafter, we use .then
-
+    console.log('linha 10 product create, nem e preciso de mandar para o front, E so usa-la no nunjucks-  variavel global criada no server:',req.session)
             Category.all().then(function(results){
-                 
+                
                 const categories = results.rows
                 return res.render("products/create.njk", {categories})
 

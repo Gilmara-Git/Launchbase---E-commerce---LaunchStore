@@ -7,6 +7,11 @@ const session = require('./config/session')
 const server = express()
 
 server.use(session)
+server.use((req, res, next)=>{
+    res.locals.session = req.session 
+    next()
+    // variavel session disponivel em toda aplicacao 
+})
 server.use(express.urlencoded({ extended: true})) /* Allow req.body to be posted  */
 server.use(express.static('public'))
 server.use(methodOverride('_method'))
