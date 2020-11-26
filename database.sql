@@ -51,6 +51,10 @@ CREATE TABLE "users" (
 
 ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
+-- password token,  added to fields
+--ALTER TABLE "users" ADD COLUMN reset_token text;
+--ALTER TABLE "users" ADD COLUMN reset_token_expires text;
+
 -- Creating procedure for field updated_at
 --CREATE FUNCTION trigger_set_timestamp()
 --RETURNS TRIGGER AS 
