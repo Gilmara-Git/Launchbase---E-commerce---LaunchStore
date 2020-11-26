@@ -56,6 +56,7 @@ async function post(req, res, next){
 }
 
 async function show(req, res, next){
+    //console.log(req.session)
 
     const { userId: id } = req.session
 
