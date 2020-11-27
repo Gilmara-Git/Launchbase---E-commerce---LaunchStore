@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const { compare }  = require('bcryptjs') // Compare e para DESCRIPTOGRAFAR a senah
+const { compare }  = require('bcryptjs') // Compare e para DESCRIPTOGRAFAR a senha
 
 
 function checkAllFields(body){
