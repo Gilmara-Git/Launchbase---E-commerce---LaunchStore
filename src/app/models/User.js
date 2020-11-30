@@ -95,7 +95,7 @@ module.exports = {
       Product.files(product.id))
   
     let promiseResults = await Promise.all(allFilesPromise);
-
+      console.log(promiseResults)
 
     //rodar a remocao do usuario (banco deletara produtos e arquivo (Cascade deletion))
     await db.query(`DELETE FROM users WHERE id = $1`, [id])
