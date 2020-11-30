@@ -76,6 +76,7 @@ async function reset(req, res, next) {
     }
     // verificar se o token bate
     console.log('token na linha 78',token)
+    console.log(user.reset_token)
     if(token != user.reset_token) return res.render('session/password-reset', {
             user:req.body,
             token,
