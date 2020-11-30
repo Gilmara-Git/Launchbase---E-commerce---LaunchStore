@@ -72,9 +72,7 @@ module.exports = {
         
         await User.delete(req.body.id)
         req.session.destroy()
-        const accountSubmenu = document.querySelector('accounts .sumenu')
-        accountSubmenu.style.visibility = none;
-        
+                
         return res.render('session/login', {          
           success: 'Conta deletada com sucesso!'
         })

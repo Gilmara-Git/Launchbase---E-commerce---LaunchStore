@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const { compare }  = require('bcryptjs') // Compare e para DESCRIPTOGRAFAR a senah
-
+const { date } = require('../../lib/utils')
 
 async function login(req, res, next){
 
@@ -85,13 +85,13 @@ async function reset(req, res, next) {
 
     // verificar se o token nao expirou
     let now = new Date();
-    now.setHours(now.getHours())
-        console.log('hora de agora', now)
+    now = now.setHours(now.getHours())
+        console.log('hora de agora', date(now))
         console.log('hora do token do usuario', user.reset_token_expires)
     if(now > user.reset_token_expires) return res.render('session/password-reset', {
        user: req.body,
        token,
-       error: 'Token expirado! Por favor, solicite uma nova recuperção de senha!'
+       error: 'Token expirado! Por favor, solicite uma nova recuperação de senha!'
     })
 
     req.user = user
