@@ -62,7 +62,32 @@ module.exports = {
 
    })
       }
+     },
+
+     async delete(req, res){
+
+      //console.log(req.body.id)
+
+      try{ 
+        
+        await User.delete(req.body.id)
+        req.session.destroy()
+        const accountSubmenu = document.querySelector('accounts .sumenu')
+        accountSubmenu.style.visibility = none;
+        
+        return res.render('session/login', {          
+          success: 'Conta deletada com sucesso!'
+        })
+
+      }catch(err){ 
+        
+        console.error(err)
+        return res.render('user/index', {
+          user:req.body,
+          erro:"Erro ao tentar deletar sua conta!"
+        })
+      
+      }
+
      }
-
-
 }
