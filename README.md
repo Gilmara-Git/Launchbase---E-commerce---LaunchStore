@@ -44,6 +44,13 @@ The fifth part:
 - Created the Home Page (showing 3 products on  a GRID. The most updated is shown first.)
 - In order to show products by their updated time, created a PROCEDURE in Postgres to update the 'updated_at' field.
 
+The sixth part:
+ - Created user registration, and User Session Control module.
+ - User can create an account.
+ - User can login.
+ - User can create products only if is logged in. ( If a session exists)
+ - User can reset password.
+
 <h1 align="center">
     <img src=https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__4__hpvXMnmUu.gif>
 </h1>
