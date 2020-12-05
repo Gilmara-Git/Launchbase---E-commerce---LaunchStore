@@ -84,8 +84,12 @@ async function reset(req, res, next) {
 
     // verificar se o token nao expirou
     let now = new Date();
+    
     now = now.setHours(now.getHours())
-        console.log('hora de agora', date(now))
+    //const teste = new Date(now).toISOString()
+        //console.log('hora de agora', date(now).format)
+        console.log('now como do mayk', now)
+        //console.log('teste', teste)
         console.log('hora do token do usuario', user.reset_token_expires)
     if(now > user.reset_token_expires) return res.render('session/password-reset', {
        user: req.body,
