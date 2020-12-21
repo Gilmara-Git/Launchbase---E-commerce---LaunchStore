@@ -28,8 +28,13 @@ module.exports =  {
             const hour = date.getHours();
 
             const minutes = date.getMinutes();
+            
+            
+
+            
 
            return {
+                
                 day,
                 month,
                 year,
@@ -37,7 +42,8 @@ module.exports =  {
                 minutes,
                 iso: `${year}-${month}-${day}`,
                 birthday: `${day}/${month}`,
-                format: `${day}/${month}/${year}`
+                format: `${day}/${month}/${year}`,
+                
            }
 
         },

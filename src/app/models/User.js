@@ -1,119 +1,102 @@
-const db = require("../../config/db");
-const { hash } = require("bcryptjs");
-const Product = require("../models/Product");
-const fs = require("fs");
+// const db = require("../../config/db");
+// const { hash } = require("bcryptjs");
+// const Product = require("../models/Product");
+// const fs = require("fs");
+const Base = require('./Base')
 
-module.exports = {
-  async findOne(filters) {
-    try {
-      let query = `SELECT * FROM users`;
+// iniciando on Base com a tabela 'users'
+Base.init({ table: 'users'})
 
-      Object.keys(filters).map((key) => {
-        // cada key WHERE | OR | id
-        query = `${query}
-        ${key}`;
+const User = {
 
-        Object.keys(filters[key]).map((field) => {
-          //console.log('linha 19 banco de dados USER',field)
+  ...Base, // User esta herdando do Base
 
-          query = `${query} ${field} = '${filters[key][field]}'`;
-        });
-      });
+//   async create(data) {
+//     try {
+//       const query = `
+//         INSERT INTO users (
+//             name,
+//             email, 
+//             password,
+//             cpf_cnpj,
+//             cep,
+//             address              
+//             )VALUES ($1, $2, $3, $4, $5, $6)
+//             RETURNING id
+// `;
 
-      //console.log('linha 26', query)
+//       // password hash ( download npm install bcryptjs )
+//       const passwordHash = await hash(data.password, 8); // hash is a promise ( needs await) - 8 é a força do Hash
 
-      const results = await db.query(query);
-      return results.rows[0];
-    } catch (err) {
-      console.error(err);
-    }
-  },
+//       const values = [
+//         data.name,
+//         data.email,
+//         passwordHash,
+//         data.cpf_cnpj.replace(/\D/g, ""),
+//         data.cep.replace(/\D/g, ""),
+//         data.address,
+//       ];
 
-  async create(data) {
-    try {
-      const query = `
-        INSERT INTO users (
-            name,
-            email, 
-            password,
-            cpf_cnpj,
-            cep,
-            address              
-            )VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING id
-`;
+//       const results = await db.query(query, values);
+//       return results.rows[0].id;
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   },
 
-      // password hash ( download npm install bcryptjs )
-      const passwordHash = await hash(data.password, 8); // hash is a promise ( needs await) - 8 é a força do Hash
+//   async update(id, fields) {
+//     let query = "UPDATE users SET";
 
-      const values = [
-        data.name,
-        data.email,
-        passwordHash,
-        data.cpf_cnpj.replace(/\D/g, ""),
-        data.cep.replace(/\D/g, ""),
-        data.address,
-      ];
+//     Object.keys(fields).map((key, index, array) => {
+//       if (index + 1 < array.length) {
+//         query = `${query}
+//             ${key} = '${fields[key]}',
 
-      const results = await db.query(query, values);
-      return results.rows[0].id;
-    } catch (err) {
-      console.error(err);
-    }
-  },
+//             `;
+//       } else {
+//         // ultima iteracao do array nao tem virgula ao final
+//         query = `${query}
+//             ${key} = '${fields[key]}'
+//             WHERE id = ${id}
+//             `;
+//       }
+//     });
+//     //console.log('linha 96 db', query)
+//     await db.query(query);
+//     return;
+//   },
 
-  async update(id, fields) {
-    let query = "UPDATE users SET";
+//   async delete(id) {
+//     // pegar todos os products
+//     //console.log('id do usuario', id)
+//     let results = await db.query("SELECT * FROM products WHERE user_id = $1",[id] )
+//     const products = results.rows;
 
-    Object.keys(fields).map((key, index, array) => {
-      if (index + 1 < array.length) {
-        query = `${query}
-            ${key} = '${fields[key]}',
-
-            `;
-      } else {
-        // ultima iteracao do array nao tem virgula ao final
-        query = `${query}
-            ${key} = '${fields[key]}'
-            WHERE id = ${id}
-            `;
-      }
-    });
-    //console.log('linha 96 db', query)
-    await db.query(query);
-    return;
-  },
-
-  async delete(id) {
-    // pegar todos os products
-    //console.log('id do usuario', id)
-    let results = await db.query("SELECT * FROM products WHERE user_id = $1",[id] )
-    const products = results.rows;
-
-    // pegar todas as images
-    const allFilesPromise = products.map(product =>  
-      Product.files(product.id))
+//     // pegar todas as images
+//     const allFilesPromise = products.map(product =>  
+//       Product.files(product.id))
   
-    let promiseResults = await Promise.all(allFilesPromise);
-      console.log(promiseResults)
+//     let promiseResults = await Promise.all(allFilesPromise);
+//       console.log(promiseResults)
 
-    //rodar a remocao do usuario (banco deletara produtos e arquivo (Cascade deletion))
-    await db.query(`DELETE FROM users WHERE id = $1`, [id])
+//     //rodar a remocao do usuario (banco deletara produtos e arquivo (Cascade deletion))
+//     await db.query(`DELETE FROM users WHERE id = $1`, [id])
    
-    // remover as images da pasta public
-    promiseResults.map(results => {
-      results.rows.map(file => {
+//     // remover as images da pasta public
+//     promiseResults.map(results => {
+//       results.rows.map(file => {
         
-        try{
-            fs.unlinkSync(file.path)
-        }catch(err){
+//         try{
+//             fs.unlinkSync(file.path)
+//         }catch(err){
 
-            console.error(err)
-        }
+//             console.error(err)
+//         }
         
-    })
-})
-  }
+//     })
+// })
+//   }
 }
 
 
+module.exports = User
