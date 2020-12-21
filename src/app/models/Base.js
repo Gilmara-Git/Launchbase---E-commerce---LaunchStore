@@ -1,6 +1,29 @@
 // A BASE tera os metodos padroes e os outros irao herdar daqui
 const db = require("../../config/db");
 
+// precisamos passar a table aqui para dentro pq o this so funciona dentro do Base
+function find(filters, table){
+    try {
+        let query = `SELECT * FROM ${table}`;
+  
+        Object.keys(filters).map((key) => {
+          // cada key WHERE | OR | id
+          query += ` ${key}`;
+  
+          Object.keys(filters[key]).map((field) => {
+              //name = value
+            query += ` ${field} = '${filters[key][field]}'`;
+          });
+        });
+  
+        return db.query(query);
+      
+      } catch (err) {
+        console.error(err);
+      }
+
+}
+
 const Base = {
   init({ table }) {
     if (!table) throw new Error("Invalid Params");
@@ -8,26 +31,26 @@ const Base = {
     return this;
     // 'this' e o objeto 'Base'
   },
+
+  async find(id) {
+ 
+    const results = await find({where: {id}}, this.table);
+    return results.rows[0];
+ 
+},
+
   async findOne(filters) {
-    try {
-      let query = `SELECT * FROM ${this.table}`;
-
-      Object.keys(filters).map((key) => {
-        // cada key WHERE | OR | id
-        query = `${query}
-            ${key}`;
-
-        Object.keys(filters[key]).map((field) => {
-          query = `${query} ${field} = '${filters[key][field]}'`;
-        });
-      });
-
-      const results = await db.query(query);
+ 
+      const results = await find(filters, this.table);
       return results.rows[0];
-    } catch (err) {
-      console.error(err);
-    }
+   
   },
+  async findAll(filters) {
+ 
+    const results = await find(filters, this.table);
+    return results.rows;
+ 
+},
   async create(fields) {
     // User.create( { o fields sera um objeto com chaves e valores})
 

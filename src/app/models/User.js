@@ -1,7 +1,7 @@
-// const db = require("../../config/db");
-// const { hash } = require("bcryptjs");
-// const Product = require("../models/Product");
-// const fs = require("fs");
+const db = require("../../config/db");
+const { hash } = require("bcryptjs");
+const Product = require("../models/Product");
+const fs = require("fs");
 const Base = require('./Base')
 
 // iniciando on Base com a tabela 'users'
