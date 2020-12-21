@@ -1,15 +1,16 @@
-const db = require("../../config/db");
-const { hash } = require("bcryptjs");
-const Product = require("../models/Product");
-const fs = require("fs");
 const Base = require('./Base')
 
-// iniciando on Base com a tabela 'users'
+// iniciando o Base com a tabela 'users'
 Base.init({ table: 'users'})
 
-const User = {
+module.exports = {
 
   ...Base, // User esta herdando do Base
+
+}
+
+
+
 
 //   async create(data) {
 //     try {
@@ -43,60 +44,3 @@ const User = {
 //       console.error(err);
 //     }
 //   },
-
-//   async update(id, fields) {
-//     let query = "UPDATE users SET";
-
-//     Object.keys(fields).map((key, index, array) => {
-//       if (index + 1 < array.length) {
-//         query = `${query}
-//             ${key} = '${fields[key]}',
-
-//             `;
-//       } else {
-//         // ultima iteracao do array nao tem virgula ao final
-//         query = `${query}
-//             ${key} = '${fields[key]}'
-//             WHERE id = ${id}
-//             `;
-//       }
-//     });
-//     //console.log('linha 96 db', query)
-//     await db.query(query);
-//     return;
-//   },
-
-//   async delete(id) {
-//     // pegar todos os products
-//     //console.log('id do usuario', id)
-//     let results = await db.query("SELECT * FROM products WHERE user_id = $1",[id] )
-//     const products = results.rows;
-
-//     // pegar todas as images
-//     const allFilesPromise = products.map(product =>  
-//       Product.files(product.id))
-  
-//     let promiseResults = await Promise.all(allFilesPromise);
-//       console.log(promiseResults)
-
-//     //rodar a remocao do usuario (banco deletara produtos e arquivo (Cascade deletion))
-//     await db.query(`DELETE FROM users WHERE id = $1`, [id])
-   
-//     // remover as images da pasta public
-//     promiseResults.map(results => {
-//       results.rows.map(file => {
-        
-//         try{
-//             fs.unlinkSync(file.path)
-//         }catch(err){
-
-//             console.error(err)
-//         }
-        
-//     })
-// })
-//   }
-}
-
-
-module.exports = User

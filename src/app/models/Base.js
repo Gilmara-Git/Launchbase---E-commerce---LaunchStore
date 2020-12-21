@@ -2,6 +2,8 @@
 const db = require("../../config/db");
 
 // precisamos passar a table aqui para dentro pq o this so funciona dentro do Base
+// esta function find nao e exposta ao mundo la fora. Ela somente esta no universo do Base
+
 function find(filters, table){
     try {
         let query = `SELECT * FROM ${table}`;
