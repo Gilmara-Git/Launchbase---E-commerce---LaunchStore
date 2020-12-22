@@ -6,7 +6,7 @@ const db = require("../../config/db");
 
 function find(filters, table){
     try {
-        let query = `SELECT * FROM ${table}`;
+        let query = `SELECT * FROM ${table}`
 
         if(filter) { // tera alguns find.all( que nao terao filters)
         Object.keys(filters).map((key) => {
@@ -57,17 +57,22 @@ const Base = {
  
 },
   async create(fields) {
+
+    console.log('fields para criar user', fields)
     // User.create( { o fields sera um objeto com chaves e valores})
 
     try {
       // keys name, email, password
       // values 'Gilmara', etc
       let keys = [],
-        values = [];
+        values = []
+
+     
 
       Object.keys(fields).map((key) => {
         keys.push(key)
-        values.push(values)
+        values.push(`'${fields[key]}'`)
+       
       });
 
       const query = `INSERT INTO ${this.table}

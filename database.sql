@@ -1,3 +1,6 @@
+--DROP SCHEMA public CASCADE; This is to delete the table that remained
+--CREATE SCHEMA public;
+
 DROP DATABASE IF EXISTS dblaunchstore;
 CREATE DATABASE dblaunchstore;
 
@@ -104,3 +107,14 @@ CREATE TABLE "session" (
 --FOREIGN KEY ("product_id")
 --REFERENCES "products" ("id")
 --ON DELETE CASCADE;
+
+
+-- to run seeds
+DELETE FROM products;
+DELETE FROM users;
+DELETE FROM files;
+
+-- restart sequence auto-increment from tables ids
+ALTER SEQUENCE products_id_seq RESTART WITH 1;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE files_id_seq RESTART WITH 1;

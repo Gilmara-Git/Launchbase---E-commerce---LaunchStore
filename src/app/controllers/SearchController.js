@@ -1,5 +1,5 @@
 const Product =  require("../models/Product")
-const File = require("../models/File")
+
 const {formatPriceComingFromDb, date} = require("../../lib/utils")
 
 
@@ -9,8 +9,7 @@ async index(req, res) {
 
    try { 
 
-      let results,
-      params = {}
+      let params = {}
     
       const { filter, category } = req.query;
     
@@ -23,15 +22,15 @@ async index(req, res) {
          params.category = category;
       }
 
-      results =  await Product.search(params);
+    let products =  await Product.search(params);
 
       async function getImage(productId) {
-         let results = await Product.files(productId)
-         const files = results.rows.map(file=> `${req.protocol}://${req.headers.host}${file.path.replace('public', '').replace(/\\/g, "/")}`)
+        let files = await Product.files(productId)
+         files = files.map(file=> `${req.protocol}://${req.headers.host}${file.path.replace('public', '').replace(/\\/g, "/")}`)
          return files[0]
       }
       
-      const productsPromise =  results.rows.map(async product=>{
+      const productsPromise =  products.map(async product=>{
          product.img = await getImage(product.id)
          product.oldPrice = formatPriceComingFromDb(product.old_price)
          product.price = formatPriceComingFromDb(product.price)
@@ -39,8 +38,8 @@ async index(req, res) {
 
       })
 
-      const products = await Promise.all(productsPromise)
-      //console.log('linha 43', products)
+      products = await Promise.all(productsPromise)
+      
       const search = {
          term : req.query.filter,
          total: products.length
