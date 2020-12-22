@@ -1,5 +1,4 @@
 const Product =  require("../models/Product")
-const File = require("../models/File")
 const {formatPriceComingFromDb, date} = require("../../lib/utils")
 
 
@@ -8,17 +7,15 @@ module.exports = {
 async index(req, res) {
 
    try {
-   let results = await Product.all() 
-   const products = results.rows 
+   const products = await Product.findAll()  
 
    if(!products) return res.send("Products not found!")  
 
    async function getImage(productId){
        
-        let results = await Product.files(productId) 
-        // Aqui estamos retornando somente o 'path'
-       
-        const files = results.rows.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '').replace(/\\/g, "/")}`)
+        let files = await Product.files(productId) 
+             
+         files = files.map(file => `${req.protocol}://${req.headers.host}${file.path.replace('public', '').replace(/\\/g, "/")}`)
     
              return files[0] // he we are returning just one image
    }

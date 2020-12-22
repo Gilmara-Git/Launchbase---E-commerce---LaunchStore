@@ -28,10 +28,6 @@ module.exports =  {
             const hour = date.getHours();
 
             const minutes = date.getMinutes();
-            
-            
-
-            
 
            return {
                 

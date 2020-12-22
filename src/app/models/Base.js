@@ -7,7 +7,8 @@ const db = require("../../config/db");
 function find(filters, table){
     try {
         let query = `SELECT * FROM ${table}`;
-  
+
+        if(filter) { // tera alguns find.all( que nao terao filters)
         Object.keys(filters).map((key) => {
           // cada key WHERE | OR | id
           query += ` ${key}`;
@@ -17,10 +18,12 @@ function find(filters, table){
             query += ` ${field} = '${filters[key][field]}'`;
           });
         });
-  
+      }
+
         return db.query(query);
       
       } catch (err) {
+
         console.error(err);
       }
 
