@@ -6,13 +6,15 @@ Base.init({ table: "products" });
 module.exports = {
   ...Base,
 
-  files(id) {
-    console.log("product id", id);
-    return db.query(
+  async files(id) {
+    
+    const results = await db.query(
       `                
         SELECT * FROM files where product_id = $1`,
       [id]
     );
+
+    return results.rows
   },
 
   search(params) {

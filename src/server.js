@@ -10,7 +10,7 @@ server.use(session)
 server.use((req, res, next)=>{
     res.locals.session = req.session 
     next()
-    // variavel session disponivel em toda aplicacao 
+    // variavel session disponivel em toda aplicacao e pode ser usada no HTML
 })
 server.use(express.urlencoded({ extended: true})) /* Allow req.body to be posted  */
 server.use(express.static('public'))
