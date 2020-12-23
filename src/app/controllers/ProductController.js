@@ -1,3 +1,4 @@
+const { unlinkSync }  = require('fs')
 const Category = require("../models/Category")
 const Product =  require("../models/Product")
 const File = require("../models/File")
@@ -48,12 +49,12 @@ module.exports = {
         status: status || 1,
       });
 
-      console.log("Coisas que vem no req.files=", req.files);
+      //console.log("Coisas que vem no req.files=", req.files);
       const filesPromise = req.files.map((file) =>
         File.create({
-          ...file,
-          product_id,
+          name: file.filename,         
           path: `${file.path.replace(/\\/g, "/")}`,
+          product_id
         })
       );
 
@@ -192,7 +193,18 @@ module.exports = {
   async delete(req, res) {
     
     try {
+
+      let files = await Product.files(req.body.id)
       await Product.delete(req.body.id);
+      
+      files.map(file => {
+        try {
+          unlinkSync(file.path)
+        }catch(error){
+          console.error(error)
+        }
+      })
+      
 
       return res.redirect("/products/create");
     } catch (error) {

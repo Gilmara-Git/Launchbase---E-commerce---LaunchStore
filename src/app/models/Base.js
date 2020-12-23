@@ -8,7 +8,7 @@ function find(filters, table){
     try {
         let query = `SELECT * FROM ${table}`
 
-        if(filter) { // tera alguns find.all( que nao terao filters)
+        if(filters) { // tera alguns find.all( que nao terao filters)
         Object.keys(filters).map((key) => {
           // cada key WHERE | OR | id
           query += ` ${key}`;
