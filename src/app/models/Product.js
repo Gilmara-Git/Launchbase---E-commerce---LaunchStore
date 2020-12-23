@@ -1,5 +1,6 @@
 const Base = require("./Base");
-const Base = require("./Base");
+const db = require('../../config/db')
+
 
 Base.init({ table: "products" });
 
@@ -17,7 +18,7 @@ module.exports = {
     return results.rows
   },
 
-  search(params) {
+  async search(params) {
     const { filter, category } = params;
 
     let query = "",
@@ -46,51 +47,8 @@ module.exports = {
             
         `;
 
-    return db.query(query);
+      const results  = await db.query(query);
+        return results.rows
   },
 };
 
-// all(){
-
-//     try {
-//         return db.query(`
-//                 SELECT * FROM products
-//                 ORDER BY updated_at DESC // depois o maik vai tratar esta questao aqui
-//         `)
-
-//     } catch (error) {
-//         console.error(error)
-//     }
-
-// },
-
-// create(data){
-
-//     const query =  `
-//                     INSERT INTO products (
-//                      category_id,
-//                      user_id,
-//                      name,
-//                      description,
-//                      old_price,
-//                      price,
-//                      quantity,
-//                      status
-//                     ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-//                     RETURNING id   `
-
-//                     data.price = data.price.replace(/\D/g, "") // reg expression (keep only digits)
-
-//     const values = [
-//                     data.category_id,
-//                     data.user_id,
-//                     data.name,
-//                     data.description,
-//                     data.old_price || data.price,
-//                     data.price,
-//                     data.quantity,
-//                     data.status || 1
-//     ]
-
-//     return db.query(query, values)
-// },
