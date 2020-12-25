@@ -5,24 +5,19 @@ module.exports = {
   async index(req, res) {
     try {
        
-      let params = {};
+      let { filter, category } = req.query;
 
-      const { filter, category } = req.query;
-      if (!filter) return res.redirect("/");
+      if(!filter|| filter.toLowerCase() == "all the store") filter = null;
+    
+     
 
-      params.filter = filter;
-
-      if (category) {
-        params.category = category;
-      }
-
-      let products = await Product.search(params);
+      let products = await Product.search({ filter, category });
 
       const productsPromise = products.map(LoadProductService.format);
       products = await Promise.all(productsPromise)
 
       const search = {
-        term: req.query.filter,
+        term: filter || "All the Store",
         total: products.length,
       };
 
