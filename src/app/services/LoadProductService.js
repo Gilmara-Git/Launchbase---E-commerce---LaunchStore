@@ -40,7 +40,7 @@ const LoadService = {
     
     load(service, filter){
         this.filter = filter
-        console.log('linha 43',this.filter)
+        //console.log('linha 43',this.filter)
         return this[service]()// aqui dentro do this vamos retornar o service que o cara quiser(como abaixo, As funcoes: 1 produto, muitos produtos)
     }, 
     async product(){
