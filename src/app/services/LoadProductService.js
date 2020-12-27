@@ -53,6 +53,7 @@ const LoadService = {
 
     },
     async products(){
+        console.log('linha 56', this.filter)
 
         try{
 
@@ -72,8 +73,7 @@ const LoadService = {
 
 
 
-
-console.log(LoadService.load('products')) // Estamos chamando a funcao product passando o filter
+//console.log(LoadService.load('products')) // Estamos chamando a funcao product passando o filter
 
 module.exports =   LoadService 
 

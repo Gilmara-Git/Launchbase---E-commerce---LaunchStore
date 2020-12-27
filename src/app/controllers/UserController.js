@@ -3,6 +3,7 @@ const { hash } = require('bcryptjs');
 const User = require('../models/User')
 const Product = require('../models/Product')
 const { formatCep, formatCpfCnpj } = require('../../lib/utils');
+const LoadProductsService = require('../services/LoadProductService')
 
 module.exports = {
   registerForm(req, res) {
@@ -118,4 +119,13 @@ module.exports = {
       });
     }
   },
+  async ads(req, res){
+    // carregando todos os produtos do usuario logado
+    const products = await LoadProductsService.load('products', {      
+      where: { user_id: req.session.userId }     
+    })
+    console.log('linha 127',products)
+    return res.render('user/ads', { products } )
+
+  }  
 };

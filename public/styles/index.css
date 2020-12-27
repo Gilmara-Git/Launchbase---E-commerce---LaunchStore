@@ -665,13 +665,6 @@ form .item #photos-preview img {
 }
 
 
-/*USER REGISTER*/
-/* Limiting the user registration form width*/
-.user-register.container.form {
-
-    max-width: 500px; 
-}
-
 /*Then making some fields smaller than the others*/
 .form input[name="email"],
 .form input[name="password"],
