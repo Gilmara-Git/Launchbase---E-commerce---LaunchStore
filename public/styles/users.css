@@ -1,6 +1,7 @@
 /*USER REGISTER*/
 /* Limiting the user registration form width*/
-.users-register
+.users-register,
+.users-dashboard
  {
 
     max-width: 500px; 

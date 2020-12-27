@@ -1,13 +1,11 @@
 {% extends 'layout.njk' %}
 
-{% block content %}
-    
-    <section class="container form"> {# This section has the "container" to hold the 90% width vh # - Same on header - and class "form"#}
-        <form method="POST" action="/products?_method=PUT" enctype="multipart/form-data">
-            <div class="header">
-                <h3>Edit product</h3>
-            </div>
+{%import "parts/card.njk" as card %}
 
+{% block content %}
+
+{% call card.render("Editar produto","product-create container")%}
+        <form method="POST" action="/products?_method=PUT" enctype="multipart/form-data">
             <div class="fields">
                 {% include "products/fields.njk" %}
 
@@ -29,7 +27,7 @@
                         value={{product.id}}
                     >
         </form>  
-    </section>
+{% endcall %}
 
                 {% include "resource_deletion/confirm.njk" %} 
 
