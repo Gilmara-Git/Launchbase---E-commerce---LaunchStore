@@ -124,7 +124,7 @@ module.exports = {
     const products = await LoadProductsService.load('products', {      
       where: { user_id: req.session.userId }     
     })
-    console.log('linha 127',products)
+   //console.log('linha 127',products)
     return res.render('user/ads', { products } )
 
   }  

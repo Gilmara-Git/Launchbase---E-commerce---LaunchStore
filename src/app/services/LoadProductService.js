@@ -53,7 +53,7 @@ const LoadService = {
 
     },
     async products(){
-        console.log('linha 56', this.filter)
+        //console.log('linha 56 loadService', this.filter)
 
         try{
 
