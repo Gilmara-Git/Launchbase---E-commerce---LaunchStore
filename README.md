@@ -55,6 +55,14 @@ The sixth part:
     <img src=https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__4__hpvXMnmUu.gif>
 </h1>
 
+The seventh part: 
+- Only logged users can purchase an item.
+- Used lottie animation to show that a purchase has been successful.
+- An email is sent to "seller" with "product" purchased and "buyer's" information.
+
+<h1 align="center">
+    <img src="https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__7__wtoBbMgsZ.gif">
+</h1>
 
 ## Languages used
 - Html5 (Hypertext)
