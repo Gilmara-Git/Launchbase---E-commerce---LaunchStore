@@ -1,0 +1,15 @@
+---Criando uma ideia de CARD com MACRO. No nunjucks MACRO e uma funcao ---
+{% macro render(title, classes)%}
+    <section class="card {{classes}}">
+
+        <div class="card-header">
+            <h3>{{title}}</h3>
+        </div>
+
+        <div class="card-content">
+           {{ caller() }} 
+        </div>
+
+    </section>
+
+{% endmacro%}

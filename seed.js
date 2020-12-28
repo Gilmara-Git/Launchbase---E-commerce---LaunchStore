@@ -13,8 +13,7 @@ let totalUsers = 3,
 
 async function createUsers(){
 
-    let users = []
-       
+    let users = []       
     let password = await hash('1111', 8)
 
     while(users.length < totalUsers){
@@ -38,7 +37,6 @@ async function createUsers(){
 async function createProducts(){
 
     let products = []
-
     
     while(products.length < totalProducts){
 
@@ -56,7 +54,7 @@ async function createProducts(){
         
         const productsPromise = products.map(product => Product.create(product))
         const productsIds = await Promise.all(productsPromise)
-        console.log('productsIds', productsIds)
+        //console.log('productsIds', productsIds)
     
         let files = []
 

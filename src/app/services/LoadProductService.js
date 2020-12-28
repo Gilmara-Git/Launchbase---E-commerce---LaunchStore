@@ -14,6 +14,7 @@ async function getImages(productId) {
 
 async function format(product){   
 
+try {
     const files = await getImages(product.id)
     product.img  =  files[0].src
     product.files = files
@@ -29,6 +30,9 @@ async function format(product){
     };
 
    return product
+}catch(error){
+    console.error(error)
+}
 
 }
 
@@ -40,7 +44,7 @@ const LoadService = {
     
     load(service, filter){
         this.filter = filter
-        console.log('linha 43',this.filter)
+        //console.log('linha 43',this.filter)
         return this[service]()// aqui dentro do this vamos retornar o service que o cara quiser(como abaixo, As funcoes: 1 produto, muitos produtos)
     }, 
     async product(){
@@ -53,6 +57,7 @@ const LoadService = {
 
     },
     async products(){
+        //console.log('linha 56 loadService', this.filter)
 
         try{
 
@@ -72,8 +77,7 @@ const LoadService = {
 
 
 
-
-console.log(LoadService.load('products')) // Estamos chamando a funcao product passando o filter
+//console.log(LoadService.load('products')) // Estamos chamando a funcao product passando o filter
 
 module.exports =   LoadService 
 
