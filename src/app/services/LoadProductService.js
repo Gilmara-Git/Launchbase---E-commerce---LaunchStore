@@ -20,9 +20,9 @@ try {
     product.files = files
     product.formattedOldPrice = formatPriceComingFromDb(product.old_price)
     product.formattedPrice = formatPriceComingFromDb(product.price)
+    //console.log('linha 23 files', files)
     
     const { day, month, hour, minutes } = date(product.updated_at);
-
     //here we are creating an object to send to Front-end ( In te Front-end it wil be product.published.day and product.published.hour)
     product.published = {
       day: `${day}/${month}`,
