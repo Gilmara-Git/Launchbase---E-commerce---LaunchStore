@@ -170,12 +170,24 @@
 
 .product-single .price-buy .buy button {
 
-    background-color:var(--secondady-color);
+    background-color:var(--secondary-color);
 
 } 
 
 .product-create {
 
 max-width: 700px;
+
+}
+
+
+.product-single .unavailable {
+
+    font-size: 14px;
+    color: #cccc;
+    font-weight: bold;
+    background: #eeee;
+    padding: 8px 16px;
+    border-radius: 4px;
 
 }

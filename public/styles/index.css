@@ -2,7 +2,7 @@
 
 :root {
     --primary-color: #fd951f;
-    --secondady-color: #1f83fd;
+    --secondary-color: #1f83fd;
 
 }
 
@@ -302,7 +302,7 @@ form .item #photos-upload p {
     padding: 8px 16px; /* width:100%;*/
     border-radius: 4px;
     box-shadow: 0 2px 2px -6px #333;
-    background-color: var(--secondady-color);
+    background-color: var(--secondary-color);
     color: white;
     width: 100%;
     text-align: center;

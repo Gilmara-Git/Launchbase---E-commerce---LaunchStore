@@ -14,6 +14,7 @@ async function getImages(productId) {
 
 async function format(product){   
 
+try {
     const files = await getImages(product.id)
     product.img  =  files[0].src
     product.files = files
@@ -29,6 +30,9 @@ async function format(product){
     };
 
    return product
+}catch(error){
+    console.error(error)
+}
 
 }
 
