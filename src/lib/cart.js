@@ -8,7 +8,7 @@ const Cart = {
 
     init(oldCart){
          if(oldCart){
-            this.items = oldCart.items  //criando todos os items do carrinho
+            this.items = oldCart.items  //criando todos os items do carrinho - item = [{ product:{}, price, quantity, formattedPrice }]
             this.total = oldCart.total
          }else {
             this.items = []
@@ -22,7 +22,40 @@ const Cart = {
          }
          return this
      },
-    addOne(product){},
+    addOne(product){
+
+        //verificar se o produto ja existe no carrinho (OldCart)
+        let inCart = this.items.find(item => item.product.id == product.id) // item.product.id - produto que ja existe no carrinho
+        if(!inCart){
+            inCart  = {
+                product : {
+                ...product,
+                formattedPrice: formatPriceComingFromDb(product.price) 
+                },
+                quantity: 0,
+                price: 0,
+                formattedPrice: formatPriceComingFromDb(0)
+
+            }
+        }
+
+
+        if(inCart.quantity >= product.quantity) return this // Nao deixa adicionar no carrinho uma quantidade maior que a quantidade de produto disponivel em estoque
+
+        //atualizando a quantidade do items(produtos) no carrinho 
+        inCart.quantity++
+        inCart.price = inCart.product.price * inCart.quantity
+        inCart.formattedPrice = formatPriceComingFromDb(inCart.price)
+
+        //atualizando o carrinho 
+        this.total.quantity++
+        this.total.price += inCart.product.price 
+        this.total.formattedPrice = formatPriceComingFromDb(this.total.price)
+    
+        this.items.push(inCart)
+
+        return this
+    },
 
     removeOne(productId){}, // dentro o items ele vai procurar por productId
 
@@ -31,6 +64,35 @@ const Cart = {
      
 }
 
+
+//adicionando um producto no carrinho // simulando
+const product = {
+    id: 1,
+    price: 199,
+    quantity: 2,
+}
+
+const product2 = {
+    id: 2,
+    price: 229,
+    quantity: 1,
+}
+console.log('ADD 1st CART ITEM')
+//como a gente esta retornando o this, conseguimos encadear com addOne()
+let oldCart = Cart.init().addOne(product)
+console.log(oldCart)
+
+console.log('ADD 2st CART ITEM')
+oldCart = Cart.init(oldCart).addOne(product)
+console.log(oldCart)
+
+console.log('ADD 3rd CART ITEM')
+oldCart = Cart.init(oldCart).addOne(product2)
+console.log(oldCart)
+
+console.log('ADD Last CART ITEM')
+oldCart = Cart.init(oldCart).addOne(product)
+console.log(oldCart)
 
 module.exports = Cart
 
@@ -44,6 +106,6 @@ module.exports = Cart
 // Metodo 3 = Deletar todo o item (trash)
 
 
-
+//
 
 
