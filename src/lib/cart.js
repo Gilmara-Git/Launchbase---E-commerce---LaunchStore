@@ -25,7 +25,7 @@ const Cart = {
     addOne(product){
 
         //verificar se o produto ja existe no carrinho (OldCart)
-        let inCart = this.items.find(item => item.product.id == product.id) // item.product.id - produto que ja existe no carrinho
+        let inCart = this.getCartItem(product.id) // item.product.id - produto que ja existe no carrinho
         if(!inCart){
             inCart  = {
                 product : {
@@ -60,7 +60,7 @@ const Cart = {
     removeOne(productId){
         // pegar o item do carrinho 
         console.log('product id sendo passado', productId)
-        const inCart = this.items.find(item => item.product.id == productId)
+        const inCart = this.getCartItem(productId)
        
         if(!inCart) return this
 
@@ -85,7 +85,27 @@ const Cart = {
         return this
     },
 
-    delete(productId){}, // ele vai procurar no items e vai remover ele todiho do carrinho
+    delete(productId){ // ele vai procurar no items e vai remover ele todiho do carrinho
+    const inCart = this.getCartItem(productId)
+    if(!inCart) return this
+
+    if(this.items.length > 0){
+
+        this.total.quantity -= inCart.quantity
+        this.total.price -= (inCart.product.price * inCart.quantity)
+        this.total.formattedPrice = formatPriceComingFromDb(this.total.price)
+    }
+
+        this.items = this.items.filter(item => inCart.product.id != item.product.id )
+        return this
+
+    },
+
+    getCartItem(productId){
+
+        return this.items.find(item => item.product.id == productId)
+
+    }
 
      
 }
@@ -103,27 +123,31 @@ const product2 = {
     price: 229,
     quantity: 1,
 }
-console.log('ADD 1st CART ITEM')
-//como a gente esta retornando o this, conseguimos encadear com addOne()
-let oldCart = Cart.init().addOne(product)
-console.log(oldCart)
+// console.log('ADD 1st CART ITEM')
+// //como a gente esta retornando o this, conseguimos encadear com addOne()
+// let oldCart = Cart.init().addOne(product)
+// console.log(oldCart)
 
-console.log('ADD 2st CART ITEM')
-oldCart = Cart.init(oldCart).addOne(product)
-console.log(oldCart)
+// console.log('ADD 2st CART ITEM')
+// oldCart = Cart.init(oldCart).addOne(product)
+// console.log(oldCart)
 
-console.log('ADD 3rd CART ITEM')
-oldCart = Cart.init(oldCart).addOne(product2)
-console.log(oldCart)
+// console.log('ADD 3rd CART ITEM')
+// oldCart = Cart.init(oldCart).addOne(product2)
+// console.log(oldCart)
 
-console.log('ADD Last CART ITEM')
-oldCart = Cart.init(oldCart).addOne(product)
-console.log(oldCart)
+// console.log('ADD Last CART ITEM')
+// oldCart = Cart.init(oldCart).addOne(product)
+// console.log(oldCart)
 
 
-console.log('REMOVING product CART ITEM')
-oldCart = Cart.init(oldCart).removeOne(product.id)
-console.log(oldCart)
+// console.log('REMOVING product CART ITEM')
+// oldCart = Cart.init(oldCart).removeOne(product.id)
+// console.log(oldCart)
+
+// console.log('Clicando na lixeira deletara tudo do carrinho')
+// oldCart = Cart.init(oldCart).delete(product.id)
+// console.log(oldCart)
 
 
 module.exports = Cart
