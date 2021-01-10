@@ -3,7 +3,7 @@
 module.exports =  {
 
         formatPriceComingFromDb(price){
-            
+            //console.log('price', price)
             return new Intl.NumberFormat("pt-BR", {
              style: "currency",
              currency: "BRL"             
