@@ -85,7 +85,7 @@ const Cart = {
         return this
     },
 
-    delete(productId){ // ele vai procurar no items e vai remover ele todiho do carrinho
+    delete(productId){ // ele vai procurar no items e vai remover ele todiho do carrinho mesmo se tiver 22 quantidades.etc
     const inCart = this.getCartItem(productId)
     if(!inCart) return this
 
