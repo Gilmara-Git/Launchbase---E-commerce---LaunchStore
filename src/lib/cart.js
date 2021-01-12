@@ -25,7 +25,7 @@ const Cart = {
     addOne(product){
 
         //verificar se o produto ja existe no carrinho (OldCart)
-        let inCart = this.items.find(item => item.product.id == product.id) // item.product.id - produto que ja existe no carrinho
+        let inCart = this.getCartItem(product.id) // item.product.id - produto que ja existe no carrinho
         if(!inCart){
             inCart  = {
                 product : {
@@ -37,10 +37,11 @@ const Cart = {
                 formattedPrice: formatPriceComingFromDb(0)
 
             }
+            this.items.push(inCart)
         }
-
-
-        if(inCart.quantity >= product.quantity) return this // Nao deixa adicionar no carrinho uma quantidade maior que a quantidade de produto disponivel em estoque
+       
+        // Nao deixa adicionar no carrinho uma quantidade maior que a quantidade de produto disponivel em estoque
+        if(inCart.quantity >= product.quantity) return this 
 
         //atualizando a quantidade do items(produtos) no carrinho 
         inCart.quantity++
@@ -52,14 +53,59 @@ const Cart = {
         this.total.price += inCart.product.price 
         this.total.formattedPrice = formatPriceComingFromDb(this.total.price)
     
-        this.items.push(inCart)
+    
+        return this
+    },
+
+    removeOne(productId){
+        // pegar o item do carrinho 
+        console.log('product id sendo passado', productId)
+        const inCart = this.getCartItem(productId)
+       
+        if(!inCart) return this
+
+        //atualizando a quantidade do items(produtos) no carrinho 
+        inCart.quantity--
+        inCart.price = inCart.product.price * inCart.quantity        
+        inCart.formattedPrice = formatPriceComingFromDb(inCart.price)  
+    
+        //atualizando o carrinho 
+        this.total.quantity--     
+        this.total.price -= inCart.product.price
+        this.total.formattedPrice = formatPriceComingFromDb(this.total.price)
+
+        if(inCart.quantity < 1){ // this is to delete this product from cart no matter how many items
+            this.items = this.items.filter(item => item.product.id != inCart.product.id )
+            //outra maneira de fazer
+            // const itemIndex = this.items.indexOf(inCart)
+            // this.items.splice(itemIndex, 1)
+            return this
+        }
 
         return this
     },
 
-    removeOne(productId){}, // dentro o items ele vai procurar por productId
+    delete(productId){ // ele vai procurar no items e vai remover ele todiho do carrinho mesmo se tiver 22 quantidades.etc
+    const inCart = this.getCartItem(productId)
+    if(!inCart) return this
 
-    delete(productId){}, // ele vai procurar no items e vai remover ele todiho do carrinho
+    if(this.items.length > 0){
+
+        this.total.quantity -= inCart.quantity
+        this.total.price -= (inCart.product.price * inCart.quantity)
+        this.total.formattedPrice = formatPriceComingFromDb(this.total.price)
+    }
+
+        this.items = this.items.filter(item => inCart.product.id != item.product.id )
+        return this
+
+    },
+
+    getCartItem(productId){
+
+        return this.items.find(item => item.product.id == productId)
+
+    }
 
      
 }
@@ -69,7 +115,7 @@ const Cart = {
 const product = {
     id: 1,
     price: 199,
-    quantity: 2,
+    quantity: 2
 }
 
 const product2 = {
@@ -77,22 +123,32 @@ const product2 = {
     price: 229,
     quantity: 1,
 }
-console.log('ADD 1st CART ITEM')
-//como a gente esta retornando o this, conseguimos encadear com addOne()
-let oldCart = Cart.init().addOne(product)
-console.log(oldCart)
+// console.log('ADD 1st CART ITEM')
+// //como a gente esta retornando o this, conseguimos encadear com addOne()
+// let oldCart = Cart.init().addOne(product)
+// console.log(oldCart)
 
-console.log('ADD 2st CART ITEM')
-oldCart = Cart.init(oldCart).addOne(product)
-console.log(oldCart)
+// console.log('ADD 2st CART ITEM')
+// oldCart = Cart.init(oldCart).addOne(product)
+// console.log(oldCart)
 
-console.log('ADD 3rd CART ITEM')
-oldCart = Cart.init(oldCart).addOne(product2)
-console.log(oldCart)
+// console.log('ADD 3rd CART ITEM')
+// oldCart = Cart.init(oldCart).addOne(product2)
+// console.log(oldCart)
 
-console.log('ADD Last CART ITEM')
-oldCart = Cart.init(oldCart).addOne(product)
-console.log(oldCart)
+// console.log('ADD Last CART ITEM')
+// oldCart = Cart.init(oldCart).addOne(product)
+// console.log(oldCart)
+
+
+// console.log('REMOVING product CART ITEM')
+// oldCart = Cart.init(oldCart).removeOne(product.id)
+// console.log(oldCart)
+
+// console.log('Clicando na lixeira deletara tudo do carrinho')
+// oldCart = Cart.init(oldCart).delete(product.id)
+// console.log(oldCart)
+
 
 module.exports = Cart
 
