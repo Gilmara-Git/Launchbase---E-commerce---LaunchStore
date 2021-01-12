@@ -171,3 +171,49 @@
     margin: 16px auto;
    
 }
+
+/*menu do carrinho */
+/* Aumetando o espaco para entrar o carrinho e nao desconfigurar nada*/
+/* Ultima coluna passamos de 280px para 315px */
+/* Esta mesma configuracao tem na index , mas estamos sobrescrevedo ela aqui para nao alterar nada
+no sistema caso deletarmos o carrinho  */
+header div.container { 
+
+    display: grid; 
+    grid-template-columns: 220px auto 315px;
+    grid-gap: 8px;
+
+}
+
+li.cart a {
+
+    position: relative;
+}
+
+li.cart a span {
+
+    background-color: red;
+    border-radius: 50%;
+
+    height: 20px;
+    width: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    position: absolute;
+    top: 16px;
+    right:0px;
+ 
+}
+
+li.cart a:hover span {
+
+    background: white;
+    color: black;
+}
+
