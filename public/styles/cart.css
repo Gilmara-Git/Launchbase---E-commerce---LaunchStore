@@ -92,13 +92,14 @@
 .cart .quantity-control i {
 
     color: #555;
-    
-    
+  
+       
 }
 
 .cart .remove, .cart .add, .cart .delete { 
 
     cursor: pointer;
+    background-color: transparent;
 
 }
 
@@ -151,4 +152,22 @@
 
     background: rgb(0, 220, 64)
 
+}
+
+/* Carrinho Vazio*/
+.cart-empty {
+
+    text-align: center;
+}
+
+.cart-empty p {
+
+    font-size: 18px;
+}
+
+.cart-empty .button {
+
+    width: 240px;
+    margin: 16px auto;
+   
 }
