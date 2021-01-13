@@ -58,9 +58,8 @@ const Base = {
 },
   async create(fields) {
 
-    //console.log('fields para criar user', fields)
-    // User.create( { o fields sera um objeto com chaves e valores})
-
+    console.log('fields para criar order', fields)
+    
     try {
       // keys name, email, password
       // values 'Gilmara', etc

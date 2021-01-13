@@ -6,6 +6,7 @@ const HomeController =  require("../app/controllers/HomeController")
 const users = require("./users") // this is the users ROUTES
 const products = require("./products")
 const cart = require("./cart")
+const orders = require("./orders")
 
 //home
 routes.get('/', HomeController.index)
@@ -18,6 +19,9 @@ routes.use("/users", users) // this is to insert '/users' in front all USERS rou
 
 // carts routes
 routes.use('/cart', cart)
+
+// orders routes
+routes.use('/orders', orders)
 
 //Alias
 routes.get('/ads/create', function (req, res){  //mask route of /products/create
