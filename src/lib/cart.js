@@ -13,7 +13,6 @@ const Cart = {
          }else {
             this.items = []
             this.total = {
-
                 quantity: 0,
                 price: 0,
                 formattedPrice: formatPriceComingFromDb(0) // isso que sera mostrado para o cliente
