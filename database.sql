@@ -128,7 +128,7 @@ CREATE TABLE "orders"(
 "price" int NOT NULL,
 "quantity" int DEFAULT 0,
 "total" int NOT NULL,
-"status" int NOT NULL,
+"status" text NOT NULL,
 "created_at" timestamp DEFAULT (now()),
 "updated_at" timestamp DEFAULT (now())
 );
