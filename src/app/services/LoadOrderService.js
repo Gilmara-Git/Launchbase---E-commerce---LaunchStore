@@ -1,21 +1,46 @@
-const Product =  require("../models/Product")
+const Order =  require("../models/Order")
+const User =  require("../models/User")
+const LoadProductService = require('./LoadProductService')
+
 const { date, formatPriceComingFromDb } = require('../../lib/utils')
 
 
-async function format(order){   
+async function format(order){  
 
-try {
-   
+    //detalhes do produto(ao inves de colocar no const , colocou direto no order)
+      order.product = await LoadProductService.load("product", {
+        where: { id: order.product_id },
+      });
 
-   return 
-}catch(error){
-    console.error(error)
-}
+      //detalhes do comprador
+      order.buyer = await User.findOne({ where: { id: order.buyer_id } });
 
-}
+      //detalhes do vendedor
+      order.seller = await User.findOne({ where: { id: order.seller_id } });
 
-// este arquivoLoadProductService sera responsavel por fazer toda a juncao todas as repeticoes de
-// procura uma order e formatar um produto.
+      //formatacao de preco
+      order.formattedPrice = formatPriceComingFromDb(order.price);
+      order.formattedTotal = formatPriceComingFromDb(order.total);
+
+      //formatacao do status
+
+      const statuses = {
+        open: "Aberto",
+        sold: "Vendido",
+        canceled: "Cancelado",
+      };
+
+      order.formattedStatus = statuses[order.status]; // order.status e um  field na tabela de pedido
+
+      //formatacao de atualizado em...
+      const updatedAt = date(order.updated_at);
+      order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} as ${updatedAt.hour}h/${updatedAt.minutes}`;
+      return order;
+    }
+
+    
+
+
 
 
 const LoadService = {
@@ -27,6 +52,9 @@ const LoadService = {
     }, 
     async order(){
         try{
+
+           const order = await Order.findOne(this.filter) 
+           return format(order)
             
         }catch(error){
             console.error(error)
@@ -34,11 +62,13 @@ const LoadService = {
 
     },
     async orders(){
-        //console.log('linha 56 loadService', this.filter)
 
-        try{
+    try{
 
-            
+    //pegar os pedidos do usuario
+    const orders = await Order.findAll(this.filter);
+    const ordersPromise = orders.map(format)   
+    return Promise.all(ordersPromise )
 
         }catch(error){
             console.error(error)

@@ -41,7 +41,8 @@
     align-items: center;
     color: #444;
     padding: 0 16px;
-
+    margin-bottom: 16px;
+    
 }
 
 .orders .item-container:hover {
