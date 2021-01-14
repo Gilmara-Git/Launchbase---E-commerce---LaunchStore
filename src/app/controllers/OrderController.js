@@ -35,7 +35,7 @@ module.exports = {
     let orders = await Order.findAll({ where: {buyer_id: req.session.userId}})
     const getOrdersPromise = orders.map(async order=>{
       //detalhes do produto(ao inves de colocar no const , colocou direto no order)
-      order.product = await LoadProductService.load('products', {where: { id: order.product_id }})
+      order.product = await LoadProductService.load('product', {where: { id: order.product_id }})
 
       //detalhes do comprador
       order.buyer = await User.findOne({where: { id: order.buyer_id}})
@@ -60,7 +60,7 @@ module.exports = {
 
       //formatacao de atualizado em...
       const updatedAt = date(order.updated_at)
-      order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} as ${updatedAt.hour}h/${updatedAt.minutes}.`
+      order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} as ${updatedAt.hour}h/${updatedAt.minutes}`
        return order
 
     })
@@ -86,7 +86,7 @@ module.exports = {
           )
        
 
-        //criar pedido  (price no pedido e o preco do produto - Se o preco do produto mudar temos o valor no pedido)
+        //criar pedido  (**price no pedido** e o preco do produto - Se o preco do produto mudar temos o valor no pedido)
          const createOrdersPromise =  filteredItems.map(async item=>{
             let { product, price:total, quantity } = item;
             const { price , id:product_id, user_id:seller_id} = product;
@@ -146,4 +146,8 @@ module.exports = {
       return res.render('orders/error')
     }
   },
+  sales(req, res){
+
+    
+  }
 };

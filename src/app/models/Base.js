@@ -58,7 +58,7 @@ const Base = {
 },
   async create(fields) {
 
-    console.log('fields para criar order', fields)
+    //console.log('fields para criar order', fields)
     
     try {
       // keys name, email, password
