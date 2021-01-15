@@ -104,5 +104,14 @@ module.exports = {
       { seller_id: req.session.userId}})
 
       return res.render('orders/sales', { sales })
+  },
+
+  async show(req, res){
+    
+    const { id } = req.params;
+   
+    const order = await LoadOrderService.load('order', { where: { id }})
+   
+     return res.render('orders/details', { order })
   }
 };
