@@ -45,8 +45,9 @@ const Base = {
 },
 
   async findOne(filters) {
- 
+   
       const results = await find(filters, this.table);
+      
       return results.rows[0];
    
   },
@@ -58,7 +59,7 @@ const Base = {
 },
   async create(fields) {
 
-    console.log('fields para criar order', fields)
+    //console.log('fields para criar order', fields)
     
     try {
       // keys name, email, password
