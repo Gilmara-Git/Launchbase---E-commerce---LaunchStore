@@ -143,3 +143,27 @@ ALTER TABLE "orders" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id")
 --BEFORE UPDATE ON orders
 --FOR EACH ROW
 --EXECUTE PROCEDURE trigger_set_timestamp();
+
+-- Estrategia de Soft delete--SOFT DELETION
+-- ADICIONAR UMA COLUNA NA TABELA product CHAMADA deleted_at (sempre sera valor nulo)
+--ALTER TABLE products ADD COLUMN "deleted_at" timestamp;
+
+-- CRIAR UMA REGRA (RULE) QUE DISPARE QUANDO UM PRODUTO FOR DELETADO( CAMPO deleted_at SERA POPULADO)
+--CREATE OR REPLACE RULE delete_product AS 
+--ON DELETE TO products
+--DO INSTEAD 
+--UPDATE products 
+--SET deleted_at  = now()
+--WHERE products.id = old.id; 
+
+-- CRIAR UMA "VIEW" TRAZENDO TUDO DA TABELA PRODUTO EM QUE O CAMPO deleted_at SEJA  == NULL
+--CREATE VIEW products_not_deleted AS
+--SELECT * FROM products WHERE deleted_at IS NULL; 
+
+
+-- RENOMEAR A "PRODUTO" PARA OUTRO "NOME" 
+--ALTER TABLE products RENAME TO product_with_deleted;
+
+
+-- RENOMEAR A "VIEW" PARA "PRODUTO"
+--ALTER VIEW products_not_deleted RENAME TO products;
