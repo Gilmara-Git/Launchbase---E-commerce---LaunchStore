@@ -31,6 +31,8 @@ ul.dropdown {
 
     transition: all 200ms; 
 
+    z-index: 1 /* posicionamento dele no eixo Z - Index dele no eixo Z*/
+
 }
 
 ul.dropdown li a,

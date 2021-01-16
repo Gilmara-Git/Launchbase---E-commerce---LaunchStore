@@ -151,7 +151,7 @@ header div.container a { /* links h1 and h2*/
 
 /*Nav primary menu on the left*/
 
-nav.primary ul {  /* ul elements on the "x"*/
+nav.primary > ul {  /* ul elements on the "x"*/
 
     display: flex;
     justify-content: space-between;
@@ -159,8 +159,9 @@ nav.primary ul {  /* ul elements on the "x"*/
 
 }
 
-nav.primary ul li a { /* elements in a  on the "x"*/
+nav.primary > ul > li > a { /* elements in a  on the "x"*/
 
+    height: 48px;
     display: flex;
     align-items: center; 
     color: white;
@@ -169,12 +170,12 @@ nav.primary ul li a { /* elements in a  on the "x"*/
 }
 
 
-nav.primary ul li a:hover{
+nav.primary > ul > li > a:hover{
 
     color: var(--primary-color);
 }
 
-nav.primary ul li a i { 
+nav.primary > ul > li > a > i { 
     
     margin-right: 8px;
 
