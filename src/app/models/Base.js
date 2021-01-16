@@ -87,7 +87,8 @@ const Base = {
     }
   },
   update(id, fields) {
-
+    console.log(id)
+    console.log(fields)
     try {
 
         let update = []

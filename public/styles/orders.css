@@ -197,6 +197,7 @@
 .order-detail .info .status.canceled h2 {
 
     color: var(--status-canceled);
+   
 }
 
 .order-detail .product {

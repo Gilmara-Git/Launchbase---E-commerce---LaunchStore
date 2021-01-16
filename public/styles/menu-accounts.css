@@ -45,15 +45,15 @@ retirei ele do styles.njk  <link rel="stylesheet" href="/styles/menu-accounts.cs
 
     color: #111;
     font-weight: bold;
-}
+}*/
 
-.accounts:hover .submenu {
+/*.accounts:hover .submenu {*/
 
-    top: 0;
+ /*   top: 0;
     opacity: 1;
     visibility: initial; 
-}
+}*/
 
-.accounts .submenu li:first-child a {
- border: none;
-}
+/*.accounts .submenu li:first-child a {*/
+ /*border: none;
+}*/

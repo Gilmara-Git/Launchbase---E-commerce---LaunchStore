@@ -113,5 +113,40 @@ module.exports = {
     const order = await LoadOrderService.load('order', { where: { id }})
    
      return res.render('orders/details', { order })
+  },
+  async update(req, res){
+    try{
+     
+      const { id, action } = req.params;
+
+      // get accepted actions ( action is coming dinamically on the req.params)
+      const acceptedActions = [ 'close', 'canceled' ]
+     
+      if(!acceptedActions.includes(action)) return res.send('Cannot perform this action.')
+
+      // //get order 
+      const order = await  LoadOrderService.load('order', { where: { id }})
+      if(!order) return res.send('Order not found!')
+     
+      
+      // verify if order is open, then update order
+      if(order.status != "open") return res.send(" Cannot do this action!")
+
+      //if there is order,  update the order status
+        const statuses = {
+          close: "sold",
+          canceled: "canceled"  
+        }
+   
+        order.status = statuses[action]
+                
+        await Order.update(id, { status: order.status })
+      
+
+      return res.redirect('/orders/sales')
+
+    }catch(error){
+      console.error(error)
+    }
   }
 };
