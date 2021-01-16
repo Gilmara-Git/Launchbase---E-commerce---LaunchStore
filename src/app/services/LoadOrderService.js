@@ -34,7 +34,7 @@ async function format(order){
 
       //formatacao de atualizado em...
       const updatedAt = date(order.updated_at);
-      order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} as ${updatedAt.hour}h/${updatedAt.minutes}`;
+      order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} as ${updatedAt.hour}h ${updatedAt.minutes}m`;
       return order;
     }
 
