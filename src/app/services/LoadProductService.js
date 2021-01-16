@@ -1,5 +1,6 @@
 const Product =  require("../models/Product")
 const { date, formatPriceComingFromDb } = require('../../lib/utils')
+const { findOneWithDelete } = require("../models/Product")
 
 
 async function getImages(productId) {
@@ -70,7 +71,22 @@ const LoadService = {
         }
 
     },
+
+    async productWithDeleted(){
+
+       try{ 
+           
+        const product = await Product.findOneWithDelete(this.filter)
     
+        return format(product)
+    }
+       
+       catch(error){ 
+        
+        console.error(erro)}
+
+}, 
+
     format // exportando para la para fora, por se acaso for preciso usar
     
 }
