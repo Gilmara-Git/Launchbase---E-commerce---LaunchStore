@@ -58,7 +58,7 @@ const Cart = {
 
     removeOne(productId){
         // pegar o item do carrinho 
-        console.log('product id sendo passado', productId)
+        //console.log('product id sendo passado para deletar do carrinho', productId)
         const inCart = this.getCartItem(productId)
        
         if(!inCart) return this
