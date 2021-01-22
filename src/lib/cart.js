@@ -111,17 +111,7 @@ const Cart = {
 
 
 //adicionando um producto no carrinho // simulando
-const product = {
-    id: 1,
-    price: 199,
-    quantity: 2
-}
-
-const product2 = {
-    id: 2,
-    price: 229,
-    quantity: 1,
-}
+//
 // console.log('ADD 1st CART ITEM')
 // //como a gente esta retornando o this, conseguimos encadear com addOne()
 // let oldCart = Cart.init().addOne(product)

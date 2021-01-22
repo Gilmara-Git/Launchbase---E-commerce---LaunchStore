@@ -126,7 +126,7 @@
             })
 
             PhotosUpload.input.files = PhotosUpload.getAllFiles(); // replace the browser fileList with the getAllFiles
-            console.log(event.target.files)
+            //console.log(event.target.files)
         }, 
 
         hasLimit(event) {
