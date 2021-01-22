@@ -58,7 +58,7 @@ const Cart = {
 
     removeOne(productId){
         // pegar o item do carrinho 
-        console.log('product id sendo passado', productId)
+        //console.log('product id sendo passado para deletar do carrinho', productId)
         const inCart = this.getCartItem(productId)
        
         if(!inCart) return this
@@ -111,17 +111,7 @@ const Cart = {
 
 
 //adicionando um producto no carrinho // simulando
-const product = {
-    id: 1,
-    price: 199,
-    quantity: 2
-}
-
-const product2 = {
-    id: 2,
-    price: 229,
-    quantity: 1,
-}
+//
 // console.log('ADD 1st CART ITEM')
 // //como a gente esta retornando o this, conseguimos encadear com addOne()
 // let oldCart = Cart.init().addOne(product)

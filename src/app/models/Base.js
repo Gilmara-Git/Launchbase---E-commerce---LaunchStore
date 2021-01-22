@@ -57,6 +57,13 @@ const Base = {
     return results.rows;
  
 },
+
+  async findOneWithDelete(filters){
+    const results = await find(filters, `${this.table}_with_deleted`) // este padrao me permite usar para produtos, users, etc
+    return results.rows[0]
+
+  },
+
   async create(fields) {
 
     //console.log('fields para criar order', fields)
@@ -87,8 +94,8 @@ const Base = {
     }
   },
   update(id, fields) {
-    console.log(id)
-    console.log(fields)
+    // console.log(id)
+    // console.log(fields)
     try {
 
         let update = []

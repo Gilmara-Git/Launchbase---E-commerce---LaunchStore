@@ -10,15 +10,14 @@
 
 
 ## About
-Launchstore is a project about building an E-commerce.
-
+Launchstore is an "e-commerce" project that was built during the Launchbase bootcamp. Below I explain my learning process along each project phase.
 
 ## Learning 
 The first part:
 - Created page **Product creation**, so new products along with its **category** can be input into the **Front-end**.
 - Created **edit** page, so a product can be edited.
 - Data is being stored on Postgres.
-- Concepts of DBML using dbdiagram.io
+- Concepts of DBML(Databse Markup Language) using dbdiagram.io
 - Asynchronous Functions, callbacks and Promise.
 - Input Mask
 
@@ -29,8 +28,8 @@ The second part:
 
 The third part:
 -  Installed and configured middleware "multer" - Node tool - as it allows to send files to the Backend. "npm install multer"
-- On the FORMS to create and update products, added "enctype="multipart/form-data" , so files can be sent to Backend.
-- On POST route at the time to save a PRODUCT, validated if req.files is not empty. 
+- On the FORMS, to create and update products, added "enctype="multipart/form-data" , so files can be sent to Backend.
+- On POST route, at the time to save a PRODUCT, validated if req.files is not empty. 
     - Got the files(images coming on req.files). Treated the file.path with method **replace** to replace "2 backslash bars " to "/". Got the product_id and created/saved the files in the Database. 
  
 - On the Edit page, retrieved all files related to a product and displayed them on the Edit page. 
@@ -49,19 +48,31 @@ The sixth part:
  - User can create an account.
  - User can login.
  - User can create products only if is logged in. ( If a session exists)
- - User can reset password.
+ - User can reset password. (Used "Mailtrap - smtp testing server" to test email receiving and password reset)
 
 <h1 align="center">
     <img src=https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__4__hpvXMnmUu.gif>
 </h1>
 
 The seventh part: 
-- Only logged users can purchase an item.
+- Only "logged" users can purchase an item. In other words, if user clicks on the "buy button", user will be directed to the login interface in case he/she has not logged in yet.
 - Used lottie animation to show that a purchase has been successful.
 - An email is sent to "seller" with "product" purchased and "buyer's" information.
 
 <h1 align="center">
     <img src="https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__7__wtoBbMgsZ.gif">
+</h1>
+
+The eighth part:
+- Created the shopping cart manager (cart.js) which controls whether or not items already exist on cart. Also, it manages the addition and removal of items on the cart. 
+- Items quantities can be removed by clicking on the "-" sign or remove all item at once by clicking on the "garbage can".
+- Also, upon purchage, buyer receives and email notification informing of a new order.
+- Buyer can set the product/order as sold or canceled.
+- Finally, implemented a Soft Delete strategy by creating a View on the database (Cloning table "products" where deleted_at field is NOT NULL). Renamed table "products" to "products_with_delete" and View to "products".  
+Now, even if the vendor deletes a product, the vendor can still see it on his orders and so can the buyer. And the deleted product is not shown anywhere else. 
+
+<h1 align="center">
+    <img src="https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__10__Ui_Viu6Y4.gif">
 </h1>
 
 ## Languages used
@@ -70,6 +81,8 @@ The seventh part:
 - Javascript
 - Postgres
 - node.js
+- mailtrap
+
 
 
 
