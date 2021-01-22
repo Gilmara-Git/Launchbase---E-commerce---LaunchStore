@@ -9,11 +9,23 @@
 </h1>
 
 
-## About
+<h2>About</h2>
 Launchstore is an "e-commerce" project that was built during the Launchbase bootcamp. Below I explain my learning process along each project phase.
 
-## Learning 
-The first part:
+<ul>
+
+<li><a href="#first-part">First Part</a></li>
+<li><a href="#second-part">Second Part</a></li>
+<li><a href="#third-part">Third Part</a></li>
+<li><a href="#forth-part">Forth Part</a></li>
+<li><a href="#fifth-part">Fifth Part</a></li>
+<li><a href="#sixth-part">Sixth Part</a></li>
+<li><a href="#seventh-part">Seventh Part</a></li>
+<li><a href="#eight-part">Eight Part</a></li>
+</ul>
+</br>
+
+<h2 id="first-part">First Part</h2>
 - Created page **Product creation**, so new products along with its **category** can be input into the **Front-end**.
 - Created **edit** page, so a product can be edited.
 - Data is being stored on Postgres.
@@ -21,12 +33,15 @@ The first part:
 - Asynchronous Functions, callbacks and Promise.
 - Input Mask
 
-The second part:
+
+<h2 id="second-part">Second Part</h2>
 - Created Image manager on Frontend. 
 - Limited up to 6 images upload.
 - From each File on Filelist(uploaded), created and array of files = []. Then, used DataTransfer Constructor(for Chrome) and Clipboard(for FireFox) on this array. After that, replaced the browser Filelist with this array . 
 
-The third part:
+
+
+<h2 id="third-part">Third Part</h2>
 -  Installed and configured middleware "multer" - Node tool - as it allows to send files to the Backend. "npm install multer"
 - On the FORMS, to create and update products, added "enctype="multipart/form-data" , so files can be sent to Backend.
 - On POST route, at the time to save a PRODUCT, validated if req.files is not empty. 
@@ -35,15 +50,15 @@ The third part:
 - On the Edit page, retrieved all files related to a product and displayed them on the Edit page. 
 - On PUT/update route, created an array coming from backend with all the images that were set to be deleted. Then, created a promise to delete them in the backend. 
 
-The forth part:
+<h2 id="forth-part">Forth Part</h2>
 - Created and styled an Image Gallery to display images on page Show.
 - Created a lightBox to display the main image in a bigger box, so user can see it details.
 
-The fifth part:
+<h2 id="fifth-part">Fifth Part</h2>
 - Created the Home Page (showing 3 products on  a GRID. The most updated is shown first.)
 - In order to show products by their updated time, created a PROCEDURE in Postgres to update the 'updated_at' field.
 
-The sixth part:
+<h2 id="sixth-part">Sixth Part</h2>
  - Created user registration, and User Session Control module.
  - User can create an account.
  - User can login.
@@ -54,7 +69,7 @@ The sixth part:
     <img src=https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__4__hpvXMnmUu.gif>
 </h1>
 
-The seventh part: 
+<h2 id="seventh-part">Seventh Part</h2> 
 - Only "logged" users can purchase an item. In other words, if user clicks on the "buy button", user will be directed to the login interface in case he/she has not logged in yet.
 - Used lottie animation to show that a purchase has been successful.
 - An email is sent to "seller" with "product" purchased and "buyer's" information.
@@ -63,7 +78,7 @@ The seventh part:
     <img src="https://ik.imagekit.io/cnbmdh4b9w/ezgif.com-gif-maker__7__wtoBbMgsZ.gif">
 </h1>
 
-The eighth part:
+<h2 id="eight-part">Eight Part</h2>
 - Created the shopping cart manager (cart.js) which controls whether or not items already exist on cart. Also, it manages the addition and removal of items on the cart. 
 - Items quantities can be removed by clicking on the "-" sign or remove all item at once by clicking on the "garbage can".
 - Also, upon purchage, buyer receives and email notification informing of a new order.
@@ -82,7 +97,6 @@ Now, even if the vendor deletes a product, the vendor can still see it on his or
 - Postgres
 - node.js
 - mailtrap
-
 
 
 
